@@ -55,7 +55,7 @@ export function SiteFooter() {
 
               {/* X / Twitter */}
               <a
-                href="https://www.linkedin.com/in/nexora-solutions-09a87a418/"
+                href="https://x.com/nexora_soln_rw"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground transition-all duration-200 hover:text-green hover:scale-110"
