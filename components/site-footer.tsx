@@ -27,7 +27,6 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            {/* 🟢 FIXED: Wrapped the logo and text in a Next.js Link pointing to the top hero section */}
             <Link 
               href="#"
               onMouseEnter={() => setIsBrandHovered(true)}
@@ -38,8 +37,8 @@ export function SiteFooter() {
               <NexoraMark className="h-9 w-9" isParentHovered={isBrandHovered} />
               
               <span 
-                className={`font-heading text-xl font-extrabold tracking-tight text-navy transition-all duration-300 ${
-                  isBrandHovered ? "text-green [text-shadow:0_0_15px_rgba(16,185,129,0.4)] transform translate-x-1" : ""
+                className={`font-heading text-xl font-extrabold tracking-tight text-navy transition-all duration-500 ${
+                  isBrandHovered ? "text-green [text-shadow:0_0_20px_rgba(16,185,129,0.35)]" : ""
                 }`}
               >
                 NEXORA Solutions
