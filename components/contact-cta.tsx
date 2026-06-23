@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Mail, Phone, MapPin, ArrowRight, CheckCircle2 } from "lucide-react"
 
 // 🔴 PASTE YOUR 8-CHARACTER FORMSPREE ID BETWEEN THE QUOTES HERE:
-const FORMSPREE_FORM_ID = "YOUR_ACTUAL_FORM_ID_HERE"
+const FORMSPREE_FORM_ID = "https://formspree.io/f/xjgqvbry"
 
 const contactItems = [
   { icon: Mail, label: "Email", value: "info@nexorasolutionsrw.qzz.io" },
