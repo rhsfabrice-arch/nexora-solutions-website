@@ -1,6 +1,8 @@
+"use client" // 🟢 FIXED: This structural rule tells Next.js to render the social icons safely
+
 import Link from "next/link"
 import { NexoraMark } from "@/components/nexora-mark"
-// 🟢 ADDED: Importing social icons from your existing icon library
+// Importing clean social icons from your lucide-react package
 import { Linkedin, Twitter, Facebook, Instagram } from "lucide-react"
 
 const columns = [
@@ -18,26 +20,26 @@ const columns = [
   },
 ]
 
-// 🟢 ADDED: Centralized social links profile array configuration
+// Centralized interactive social handle destinations
 const socialLinks = [
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/in/nexora-solutions-09a87a418/", // Replace with your actual page link
+    href: "https://linkedin.com", // Replace with your real page address later
     icon: Linkedin,
   },
   {
     name: "X / Twitter",
-    href: "https://x.com/nexora_soln_rw", // Replace with your actual page link
+    href: "https://x.com", // Replace with your real page address later
     icon: Twitter,
   },
   {
     name: "Facebook",
-    href: "https://www.facebook.com/profile.php?id=61590964061819", // Replace with your actual page link
+    href: "https://facebook.com", // Replace with your real page address later
     icon: Facebook,
   },
   {
     name: "Instagram",
-    href: "https://instagram.com", // Replace with your actual page link
+    href: "https://instagram.com", // Replace with your real page address later
     icon: Instagram,
   },
 ]
@@ -82,14 +84,14 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
-          <div className="flex flex-col gap-2 sm:gap-1">
+          <div className="flex flex-col gap-1">
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} Nexora Solutions Ltd. All rights reserved.
             </p>
             <p className="text-sm text-muted-foreground">Business Solutions · East Africa</p>
           </div>
 
-          {/* 🟢 ADDED: Clean, accessible, interactive social media icon grid wrapper */}
+          {/* Clean, interactive horizontal social media ribbon grid mapping */}
           <div className="flex items-center gap-5">
             {socialLinks.map((social) => {
               const IconComponent = social.icon
@@ -100,7 +102,7 @@ export function SiteFooter() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground transition-all duration-200 hover:text-green hover:scale-110"
-                  aria-label={`Follow Nexora Solutions on ${social.name}`}
+                  aria-label={`Follow Nexora on ${social.name}`}
                 >
                   <IconComponent className="h-5 w-5" />
                 </a>
