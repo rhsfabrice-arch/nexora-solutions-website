@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Mail, Phone, MapPin, ArrowRight, CheckCircle2 } from "lucide-react"
 
 // 🔴 PASTE YOUR 8-CHARACTER FORMSPREE ID BETWEEN THE QUOTES HERE:
-const FORMSPREE_FORM_ID = "https://formspree.io/f/xjgqvbry"
+const FORMSPREE_FORM_ID = "xjgqvbry"
 
 export function ContactCta() {
   const [isSubmitting, setIsSubmitting] = useState(false)
