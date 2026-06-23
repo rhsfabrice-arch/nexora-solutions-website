@@ -30,14 +30,14 @@ export function SiteHeader() {
         >
           <NexoraMark className="h-9 w-9" isParentHovered={isBrandHovered} />
           
-          {/* 🟢 ATTRACTIVE TEXT EFFECT: Smooth brand color shift with an ambient mist look */}
+          {/* 🟢 INTENSE TEXT SHADOW: Turns completely emerald green with a heavy aura bloom when hovered */}
           <span 
-            className={`font-heading text-lg font-extrabold tracking-tight text-navy transition-all duration-500 ${
-              isBrandHovered ? "text-green [text-shadow:0_0_20px_rgba(16,185,129,0.35)]" : ""
+            className={`font-heading text-lg font-extrabold tracking-tight text-navy transition-all duration-300 ${
+              isBrandHovered ? "text-green [text-shadow:0_0_25px_#10b981,0_0_10px_rgba(16,185,129,0.6)] transform translate-x-1" : ""
             }`}
           >
             NEXORA
-            <span className={`transition-colors duration-500 ${isBrandHovered ? "text-green" : "text-muted-foreground"} sm:inline ml-1`}>
+            <span className={`transition-colors duration-300 ${isBrandHovered ? "text-green" : "text-muted-foreground"} sm:inline ml-1`}>
               Solutions
             </span>
           </span>
