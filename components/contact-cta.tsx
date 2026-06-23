@@ -24,8 +24,8 @@ export function ContactCta() {
     }
 
     try {
-      // 🟢 FIXED: The full Formspree target address has been added before your Form ID
-      const response = await fetch("https://formspree.io", {
+      // 🟢 PRODUCTION ROUTE: Replace YOUR_NEW_FORMSPREE_ID with your clean 8-character Formspree ID
+      const response = await fetch("mlgyddor", {
         method: "POST",
         headers: {
           "Accept": "application/json",
