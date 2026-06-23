@@ -15,15 +15,34 @@ const navLinks = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
+  // 🟢 UNIFIED HOVER STATE: Manages synchronization between logo and text glow
+  const [isBrandHovered, setIsBrandHovered] = useState(false)
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="#" className="flex items-center gap-2.5" aria-label="Nexora Solutions home">
-          <NexoraMark className="h-8 w-8" />
-          <span className="font-heading text-lg font-extrabold tracking-tight text-navy">
-            NEXORA<span className="text-green"> </span>
-            <span className="hidden text-muted-foreground sm:inline">Solutions</span>
+        
+        {/* 🟢 UNIFIED BRAND LINK: Tracks mouse movements and sets cushion gap to 5 */}
+        <Link 
+          href="#" 
+          onMouseEnter={() => setIsBrandHovered(true)}
+          onMouseLeave={() => setIsBrandHovered(false)}
+          className="inline-flex items-center gap-5 cursor-pointer group select-none relative py-1" 
+          aria-label="Nexora Solutions home"
+        >
+          {/* Passes hover status directly into the image component */}
+          <NexoraMark className="h-9 w-9" isParentHovered={isBrandHovered} />
+          
+          {/* 🟢 GLOWING HEADER TEXT: Shifts colors, adds an emerald aura shadow, and applies subtle transform on hover */}
+          <span 
+            className={`font-heading text-lg font-extrabold tracking-tight text-navy transition-all duration-300 ${
+              isBrandHovered ? "text-green [text-shadow:0_0_15px_rgba(16,185,129,0.4)] transform translate-x-1" : ""
+            }`}
+          >
+            NEXORA
+            <span className={`transition-colors duration-300 ${isBrandHovered ? "text-green" : "text-muted-foreground"} sm:inline ml-1`}>
+              Solutions
+            </span>
           </span>
         </Link>
 
