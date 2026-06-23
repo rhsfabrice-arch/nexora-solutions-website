@@ -24,27 +24,27 @@ export function ContactCta() {
     }
 
     try {
-      // Direct local background endpoint call inside the internal app ecosystem
-      const response = await fetch("/api/send", {
+      // 🟢 FORMSPREE FIX: Post the data bundle straight to Formspree infrastructure
+      const response = await fetch("mojovvdw", {
         method: "POST",
         headers: {
+          "Accept": "application/json",
           "Content-Type": "application/json"
         },
         body: JSON.stringify(payload)
       })
 
-      const result = await response.json()
-
-      if (response.ok && result.success) {
+      if (response.ok) {
         setIsSuccess(true)
         ;(e.target as HTMLFormElement).reset()
       } else {
-        throw new Error(result.error || "Server transaction drop.")
+        const errData = await response.json()
+        throw new Error(errData.error || "Formspree gateway distribution error.")
       }
     } catch (err: any) {
-      // Fail-proof override ensures the layout swaps to green locally for optimal user experience
-      setIsSuccess(true)
-      ;(e.target as HTMLFormElement).reset()
+      setErrorMessage(err.message || "Network transmission error. Please try again.")
+      // Removed the fake override fallback so errors show up properly during debugging
+      setIsSuccess(false)
     } finally {
       setIsSubmitting(false)
     }
@@ -149,6 +149,11 @@ export function ContactCta() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4" aria-label="Contact Nexora">
+                  {errorMessage && (
+                    <div className="rounded-xl bg-red-50 p-3 text-xs font-medium text-red-600 border border-red-200">
+                      {errorMessage}
+                    </div>
+                  )}
                   <div className="grid gap-4 sm:grid-cols-2">
                     <Field id="name" name="name" label="Full name" placeholder="Jane Doe" required />
                     <Field id="company" name="company" label="Company" placeholder="Acme Ltd" required />
@@ -177,7 +182,7 @@ export function ContactCta() {
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-green px-7 py-3.5 text-sm font-semibold text-accent-foreground transition-all hover:bg-[#0f9d63] disabled:opacity-50"
                   >
                     {isSubmitting ? "Sending..." : "Send message"}
-                    <ArrowRight className={`h-4 w-4 ${isSubmitting ? "animate-spin" : ""}`} />
+                    <ArrowRight className="h-4 w-4" />
                   </button>
                 </form>
               )}
@@ -190,30 +195,17 @@ export function ContactCta() {
   )
 }
 
-function Field({
-  id,
-  name,
-  label,
-  type = "text",
-  placeholder,
-  required = false,
-}: {
-  id: string
-  name: string
-  label: string
-  type?: string
-  placeholder?: string
-  required?: boolean
-}) {
+// Simple internal helper component mapping to preserve your existing styling framework layouts
+function Field({ id, name, label, type = "text", placeholder, required }: { id: string, name: string, label: string, type?: string, placeholder: string, required?: boolean }) {
   return (
     <div>
       <label htmlFor={id} className="text-sm font-medium text-navy">
         {label}
       </label>
       <input
+        type={type}
         id={id}
         name={name}
-        type={type}
         placeholder={placeholder}
         required={required}
         className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-navy outline-none transition-colors placeholder:text-muted-foreground focus:border-green focus:ring-2 focus:ring-green/30"
