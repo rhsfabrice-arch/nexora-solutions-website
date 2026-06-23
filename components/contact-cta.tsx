@@ -1,15 +1,52 @@
 "use client"
 
-import React from "react"
-import { useForm, ValidationError } from "@formspree/react"
+import React, { useState, FormEvent } from "react"
+import Link from "next/link"
 import { Mail, Phone, MapPin, ArrowRight, CheckCircle2 } from "lucide-react"
 
-// 🔴 PASTE YOUR 8-CHARACTER FORMSPREE ID BETWEEN THE QUOTES HERE:
-const FORMSPREE_FORM_ID = "xjgqvbry"
-
 export function ContactCta() {
-  // Use Formspree's native official submission tracking hook layers
-  const [state, handleSubmit] = useForm(FORMSPREE_FORM_ID)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setErrorMessage("")
+
+    const formData = new FormData(e.currentTarget)
+    const payload = {
+      name: formData.get("name"),
+      company: formData.get("company"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      message: formData.get("message"),
+    }
+
+    try {
+      // Calls your clean local route tunnel instead of an outside URL line
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+
+      const result = await response.json()
+
+      if (response.ok && result.success) {
+        setIsSuccess(true)
+        ;(e.target as HTMLFormElement).reset()
+      } else {
+        throw new Error(result.error || "Submission rejected by dispatch route.")
+      }
+    } catch (err: any) {
+      setErrorMessage("Message delivery failed. Please verify fields and try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <section id="contact" className="bg-background py-20 lg:py-28">
@@ -91,8 +128,7 @@ export function ContactCta() {
 
             {/* Right Column Form Layout */}
             <div className="relative rounded-2xl bg-background p-6 sm:p-8">
-              {state.succeeded ? (
-                /* OFFICIAL IN-PAGE INLINE SUCCESS VIEWER STATE */
+              {isSuccess ? (
                 <div className="flex flex-col items-center justify-center text-center h-full py-12">
                   <CheckCircle2 className="h-16 w-16 text-green animate-bounce" />
                   <h3 className="mt-4 font-heading text-2xl font-bold text-navy">
@@ -101,33 +137,22 @@ export function ContactCta() {
                   <p className="mt-2 text-sm text-muted-foreground max-w-xs">
                     Thank you for reaching out. Your request has been transmitted securely inside the workspace. Our team will review your project parameters and respond shortly.
                   </p>
+                  <button 
+                    onClick={() => setIsSuccess(false)}
+                    className="mt-6 text-sm font-semibold text-green underline hover:text-green-dark"
+                  >
+                    Send another message
+                  </button>
                 </div>
               ) : (
-                /* OFFICIAL FORMSPREE HOOKED ACTION CONTAINER */
                 <form onSubmit={handleSubmit} className="space-y-4" aria-label="Contact Nexora">
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <div>
-                      <label htmlFor="name" className="text-sm font-medium text-navy">Full name</label>
-                      <input id="name" type="text" name="name" placeholder="Jane Doe" required className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-navy outline-none" />
-                      <ValidationError prefix="Name" field="name" errors={state.errors} className="text-xs text-red-500 mt-1" />
-                    </div>
-                    <div>
-                      <label htmlFor="company" className="text-sm font-medium text-navy">Company</label>
-                      <input id="company" type="text" name="company" placeholder="Acme Ltd" required className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-navy outline-none" />
-                      <ValidationError prefix="Company" field="company" errors={state.errors} className="text-xs text-red-500 mt-1" />
-                    </div>
+                    <Field id="name" name="name" label="Full name" placeholder="Jane Doe" required />
+                    <Field id="company" name="company" label="Company" placeholder="Acme Ltd" required />
                   </div>
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <div>
-                      <label htmlFor="email" className="text-sm font-medium text-navy">Email Address</label>
-                      <input id="email" type="email" name="email" placeholder="jane@acme.com" required className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-navy outline-none" />
-                      <ValidationError prefix="Email" field="email" errors={state.errors} className="text-xs text-red-500 mt-1" />
-                    </div>
-                    <div>
-                      <label htmlFor="phone" className="text-sm font-medium text-navy">Phone Number</label>
-                      <input id="phone" type="text" name="phone" placeholder="+250 ..." required className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-navy outline-none" />
-                      <ValidationError prefix="Phone" field="phone" errors={state.errors} className="text-xs text-red-500 mt-1" />
-                    </div>
+                    <Field id="email" name="email" label="Email" type="email" placeholder="jane@acme.com" required />
+                    <Field id="phone" name="phone" label="Phone" placeholder="+250 ..." required />
                   </div>
                   <div>
                     <label htmlFor="message" className="text-sm font-medium text-navy">
@@ -141,16 +166,21 @@ export function ContactCta() {
                       required
                       className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-navy outline-none transition-colors placeholder:text-muted-foreground focus:border-green focus:ring-2 focus:ring-green/30"
                     />
-                    <ValidationError prefix="Message" field="message" errors={state.errors} className="text-xs text-red-500 mt-1" />
                   </div>
+
+                  {errorMessage && (
+                    <p className="text-xs font-semibold text-red-500 mt-2 bg-red-50 p-2.5 rounded-lg border border-red-100">
+                      ⚠️ {errorMessage}
+                    </p>
+                  )}
 
                   <button
                     type="submit"
-                    disabled={state.submitting}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-green px-7 py-3.5 text-sm font-semibold text-accent-foreground transition-all hover:bg-[#0f9d63] disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={isSubmitting}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-green px-7 py-3.5 text-sm font-semibold text-accent-foreground transition-all hover:bg-[#0f9d63] disabled:opacity-50"
                   >
-                    {state.submitting ? "Sending Parameters..." : "Send message"}
-                    <ArrowRight className="h-4 w-4" />
+                    {isSubmitting ? "Sending Parameters..." : "Send message"}
+                    <ArrowRight className={`h-4 w-4 ${isSubmitting ? "animate-spin" : ""}`} />
                   </button>
                 </form>
               )}
@@ -160,5 +190,37 @@ export function ContactCta() {
         </div>
       </div>
     </section>
+  )
+}
+
+function Field({
+  id,
+  name,
+  label,
+  type = "text",
+  placeholder,
+  required = false,
+}: {
+  id: string
+  name: string
+  label: string
+  type?: string
+  placeholder?: string
+  required?: boolean
+}) {
+  return (
+    <div>
+      <label htmlFor={id} className="text-sm font-medium text-navy">
+        {label}
+      </label>
+      <input
+        id={id}
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        required={required}
+        className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-navy outline-none transition-colors placeholder:text-muted-foreground focus:border-green focus:ring-2 focus:ring-green/30"
+      />
+    </div>
   )
 }
