@@ -36,9 +36,10 @@ export function SiteFooter() {
             >
               <NexoraMark className="h-9 w-9" isParentHovered={isBrandHovered} />
               
+              {/* 🟢 INTENSE FOOTER GLOW MATCH */}
               <span 
-                className={`font-heading text-xl font-extrabold tracking-tight text-navy transition-all duration-500 ${
-                  isBrandHovered ? "text-green [text-shadow:0_0_20px_rgba(16,185,129,0.35)]" : ""
+                className={`font-heading text-xl font-extrabold tracking-tight text-navy transition-all duration-300 ${
+                  isBrandHovered ? "text-green [text-shadow:0_0_25px_#10b981,0_0_10px_rgba(16,185,129,0.6)] transform translate-x-1" : ""
                 }`}
               >
                 NEXORA Solutions
