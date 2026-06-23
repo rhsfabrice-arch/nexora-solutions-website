@@ -15,14 +15,12 @@ const navLinks = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
-  // 🟢 UNIFIED HOVER STATE: Manages synchronization between logo and text glow
   const [isBrandHovered, setIsBrandHovered] = useState(false)
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         
-        {/* 🟢 UNIFIED BRAND LINK: Tracks mouse movements and sets cushion gap to 5 */}
         <Link 
           href="#" 
           onMouseEnter={() => setIsBrandHovered(true)}
@@ -30,17 +28,16 @@ export function SiteHeader() {
           className="inline-flex items-center gap-5 cursor-pointer group select-none relative py-1" 
           aria-label="Nexora Solutions home"
         >
-          {/* Passes hover status directly into the image component */}
           <NexoraMark className="h-9 w-9" isParentHovered={isBrandHovered} />
           
-          {/* 🟢 GLOWING HEADER TEXT: Shifts colors, adds an emerald aura shadow, and applies subtle transform on hover */}
+          {/* 🟢 ATTRACTIVE TEXT EFFECT: Smooth brand color shift with an ambient mist look */}
           <span 
-            className={`font-heading text-lg font-extrabold tracking-tight text-navy transition-all duration-300 ${
-              isBrandHovered ? "text-green [text-shadow:0_0_15px_rgba(16,185,129,0.4)] transform translate-x-1" : ""
+            className={`font-heading text-lg font-extrabold tracking-tight text-navy transition-all duration-500 ${
+              isBrandHovered ? "text-green [text-shadow:0_0_20px_rgba(16,185,129,0.35)]" : ""
             }`}
           >
             NEXORA
-            <span className={`transition-colors duration-300 ${isBrandHovered ? "text-green" : "text-muted-foreground"} sm:inline ml-1`}>
+            <span className={`transition-colors duration-500 ${isBrandHovered ? "text-green" : "text-muted-foreground"} sm:inline ml-1`}>
               Solutions
             </span>
           </span>
