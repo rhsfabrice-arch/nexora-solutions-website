@@ -16,7 +16,7 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         from: "onboarding@resend.dev", 
-        to: "nexorasolutionsrw@gmail.com", 
+        to: "info@nexorasolutionsrw.qzz.io", 
         subject: `Nexora Corporate Lead: ${data.name || "New Submission"}`,
         html: `
           <div style="font-family: sans-serif; padding: 20px; color: #0b1f35; background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0;">
