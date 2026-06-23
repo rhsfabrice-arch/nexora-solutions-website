@@ -1,80 +1,63 @@
-import {
-  Server,
-  Lightbulb,
-  BookOpenCheck,
-  ScanLine,
-  Calculator,
-  LineChart,
-  ArrowUpRight,
-} from "lucide-react"
+"use client"
 
-const services = [
+const servicesList = [
   {
-    icon: Server,
     title: "IT Services",
-    desc: "Managed IT, networks, cloud infrastructure, security, and reliable support that keeps your operations running.",
+    description: "Enterprise-grade infrastructure, network security, and managed IT support tailored for your business scaling.",
+    icon: "💻"
   },
   {
-    icon: Lightbulb,
-    title: "Business Consulting",
-    desc: "Strategic advisory and process optimization to help your enterprise scale efficiently and confidently.",
+    title: "Consulting",
+    description: "Strategic technology planning and operational workflow optimization to drive efficiency across East Africa.",
+    icon: "📊"
   },
   {
-    icon: BookOpenCheck,
-    title: "QuickBooks Implementation",
-    desc: "Certified setup, migration, and training on QuickBooks tailored to your accounting workflows.",
+    title: "QuickBooks & POS",
+    description: "Seamless deployment of point-of-sale configurations and accounting integrations for real-time tracking.",
+    icon: "🛒"
   },
   {
-    icon: ScanLine,
-    title: "POS Systems",
-    desc: "End-to-end point-of-sale deployment for retail and hospitality, with inventory and payment integration.",
-  },
-  {
-    icon: Calculator,
-    title: "Taxation",
-    desc: "Compliant tax preparation, filing, and advisory aligned with regional regulatory requirements.",
-  },
-  {
-    icon: LineChart,
-    title: "Accounting Technology",
-    desc: "Modern financial systems, automation, and reporting that turn your numbers into clear decisions.",
-  },
+    title: "Taxation Solutions",
+    description: "Corporate compliance auditing, tax structuring, and complete local regulatory alignment services.",
+    icon: "🏛️"
+  }
 ]
 
-export function Services() {
+export default function ServicesSection() {
   return (
-    <section id="services" className="bg-background py-20 lg:py-28">
+    <section id="services" className="py-20 bg-background relative z-10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl">
-          <span className="text-sm font-semibold uppercase tracking-wider text-green">
-            What we do
-          </span>
-          <h2 className="mt-3 text-balance font-heading text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-            Complete business technology, under one roof
+        
+        {/* Header Content */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="font-heading text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
+            Our Business Solutions
           </h2>
-          <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
-            From infrastructure to accounting, Nexora provides the integrated
-            solutions modern businesses need to grow.
+          <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
+            Professional engineering and corporate advisory technology designed to empower market growth.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s) => (
-            <article
-              key={s.title}
-              className="group relative rounded-2xl border border-border bg-card p-7 shadow-[0_2px_8px_rgba(11,31,53,0.04)] transition-all hover:-translate-y-1 hover:border-green/40 hover:shadow-[0_20px_40px_-20px_rgba(11,31,53,0.2)]"
+        {/* COMPACT RESPONSIVE GRID LAYOUT */}
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {servicesList.map((service, idx) => (
+            <div 
+              key={idx}
+              className="flex flex-col p-6 rounded-2xl border border-border bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-soft text-green">
-                <s.icon className="h-6 w-6" />
+              <div className="text-3xl mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-navy/5 text-navy">
+                {service.icon}
               </div>
-              <h3 className="mt-5 flex items-center gap-1 font-heading text-xl font-bold text-navy">
-                {s.title}
-                <ArrowUpRight className="h-4 w-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+              <h3 className="font-heading text-lg font-bold text-navy mb-2">
+                {service.title}
               </h3>
-              <p className="mt-2.5 leading-relaxed text-muted-foreground">{s.desc}</p>
-            </article>
+              <p className="text-sm text-muted-foreground leading-relaxed flex-grow">
+                {service.description}
+              </p>
+            </div>
           ))}
         </div>
+
       </div>
     </section>
   )
