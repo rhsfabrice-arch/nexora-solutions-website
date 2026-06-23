@@ -1,26 +1,20 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, FormEvent } from "react"
 import Link from "next/link"
 import { Mail, Phone, MapPin, ArrowRight, CheckCircle2 } from "lucide-react"
-
-// 🔴 PASTE YOUR 8-CHARACTER FORMSPREE ID BETWEEN THE QUOTES HERE:
-const FORMSPREE_FORM_ID = "xjgqvbry"
 
 export function ContactCta() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
 
-  async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
     setErrorMessage("")
 
-    const formElement = e.currentTarget
-    const formData = new FormData(formElement)
-    
-    // Convert inputs into a standard un-nested JSON data object
+    const formData = new FormData(e.currentTarget)
     const payload = {
       name: formData.get("name"),
       company: formData.get("company"),
@@ -30,26 +24,25 @@ export function ContactCta() {
     }
 
     try {
-      // Direct JSON Post request — the standard accepted input stream for Formspree
-      const response = await fetch(`https://formspree.io{FORMSPREE_FORM_ID}`, {
+      // Calls your clean local route tunnel instead of an outside URL line
+      const response = await fetch("/api/send", {
         method: "POST",
-        body: JSON.stringify(payload),
         headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        }
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
       })
 
-      if (response.ok) {
+      const result = await response.json()
+
+      if (response.ok && result.success) {
         setIsSuccess(true)
-        formElement.reset()
+        ;(e.target as HTMLFormElement).reset()
       } else {
-        // Fallback Step: If the network drops, fallback to direct HTML submission
-        formElement.submit()
+        throw new Error(result.error || "Submission rejected by dispatch route.")
       }
-    } catch (err) {
-      // Fallback Step: Natively posts via the browser if a CORS block hits
-      formElement.submit()
+    } catch (err: any) {
+      setErrorMessage("Message delivery failed. Please verify fields and try again.")
     } finally {
       setIsSubmitting(false)
     }
@@ -152,13 +145,7 @@ export function ContactCta() {
                   </button>
                 </div>
               ) : (
-                <form 
-                  onSubmit={handleFormSubmit}
-                  action={`https://formspree.io{FORMSPREE_FORM_ID}`}
-                  method="POST"
-                  className="space-y-4" 
-                  aria-label="Contact Nexora"
-                >
+                <form onSubmit={handleSubmit} className="space-y-4" aria-label="Contact Nexora">
                   <div className="grid gap-4 sm:grid-cols-2">
                     <Field id="name" name="name" label="Full name" placeholder="Jane Doe" required />
                     <Field id="company" name="company" label="Company" placeholder="Acme Ltd" required />
@@ -192,7 +179,7 @@ export function ContactCta() {
                     disabled={isSubmitting}
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-green px-7 py-3.5 text-sm font-semibold text-accent-foreground transition-all hover:bg-[#0f9d63] disabled:opacity-50"
                   >
-                    {isSubmitting ? "Sending..." : "Send message"}
+                    {isSubmitting ? "Sending Parameters..." : "Send message"}
                     <ArrowRight className={`h-4 w-4 ${isSubmitting ? "animate-spin" : ""}`} />
                   </button>
                 </form>
