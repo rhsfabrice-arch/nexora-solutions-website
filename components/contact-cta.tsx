@@ -17,23 +17,16 @@ export function ContactCta() {
     setIsSubmitting(true)
     setErrorMessage("")
 
+    // FIX: Using raw native HTML FormData object layers natively bypasses CORS network fetch errors
     const formData = new FormData(e.currentTarget)
-    const data = {
-      name: formData.get("name"),
-      company: formData.get("company"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      message: formData.get("message"),
-    }
 
     try {
       const response = await fetch(`https://formspree.io{FORMSPREE_FORM_ID}`, {
         method: "POST",
+        body: formData, // Send raw fields data natively without JSON conversion overrides
         headers: {
-          "Content-Type": "application/json",
           "Accept": "application/json"
-        },
-        body: JSON.stringify(data)
+        }
       })
 
       if (response.ok) {
@@ -44,7 +37,7 @@ export function ContactCta() {
         throw new Error(errData.error || "Formspree submission error. Please check your Form ID.")
       }
     } catch (err: any) {
-      setErrorMessage(err.message || "Network error. Please check your data connection.")
+      setErrorMessage("Submission connection blocked. Please verify your data or refresh the window.")
     } finally {
       setIsSubmitting(false)
     }
