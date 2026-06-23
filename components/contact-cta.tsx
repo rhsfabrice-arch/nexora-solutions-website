@@ -12,34 +12,44 @@ export function ContactCta() {
   const [isSuccess, setIsSuccess] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
 
-  // Secure Server Action execution proxy handler
-  async function handleFormSubmit(formData: FormData) {
+  async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
     setIsSubmitting(true)
     setErrorMessage("")
 
-    try {
-      // Package parameters into native browser URL encoded strings
-      const searchParams = new URLSearchParams()
-      formData.forEach((value, key) => {
-        searchParams.append(key, value.toString())
-      })
+    const formElement = e.currentTarget
+    const formData = new FormData(formElement)
+    
+    // Convert inputs into a standard un-nested JSON data object
+    const payload = {
+      name: formData.get("name"),
+      company: formData.get("company"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      message: formData.get("message"),
+    }
 
-      // Send the transmission stream directly to Formspree
+    try {
+      // Direct JSON Post request — the standard accepted input stream for Formspree
       const response = await fetch(`https://formspree.io{FORMSPREE_FORM_ID}`, {
         method: "POST",
-        body: searchParams,
+        body: JSON.stringify(payload),
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "application/json",
           "Accept": "application/json"
-        },
-        mode: "no-cors" // 🔴 CRITICAL: Bypasses free domain CORS & NXDOMAIN blocks completely!
+        }
       })
 
-      // Force inline template swap state
-      setIsSuccess(true)
+      if (response.ok) {
+        setIsSuccess(true)
+        formElement.reset()
+      } else {
+        // Fallback Step: If the network drops, fallback to direct HTML submission
+        formElement.submit()
+      }
     } catch (err) {
-      // Fallback backup state to protect client workflow
-      setIsSuccess(true)
+      // Fallback Step: Natively posts via the browser if a CORS block hits
+      formElement.submit()
     } finally {
       setIsSubmitting(false)
     }
@@ -126,8 +136,7 @@ export function ContactCta() {
             {/* Right Column Form Layout */}
             <div className="relative rounded-2xl bg-background p-6 sm:p-8">
               {isSuccess ? (
-                /* IN-PAGE SUCCESS TAB VIEW — Never leaves your site */
-                <div className="flex flex-col items-center justify-center text-center h-full py-12 animate-fade-in">
+                <div className="flex flex-col items-center justify-center text-center h-full py-12">
                   <CheckCircle2 className="h-16 w-16 text-green animate-bounce" />
                   <h3 className="mt-4 font-heading text-2xl font-bold text-navy">
                     Message Sent!
@@ -143,9 +152,10 @@ export function ContactCta() {
                   </button>
                 </div>
               ) : (
-                /* ACTUAL RAW INPUT FORM BLOCK */
                 <form 
-                  action={handleFormSubmit}
+                  onSubmit={handleFormSubmit}
+                  action={`https://formspree.io{FORMSPREE_FORM_ID}`}
+                  method="POST"
                   className="space-y-4" 
                   aria-label="Contact Nexora"
                 >
@@ -182,7 +192,7 @@ export function ContactCta() {
                     disabled={isSubmitting}
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-green px-7 py-3.5 text-sm font-semibold text-accent-foreground transition-all hover:bg-[#0f9d63] disabled:opacity-50"
                   >
-                    {isSubmitting ? "Sending Parameters..." : "Send message"}
+                    {isSubmitting ? "Sending..." : "Send message"}
                     <ArrowRight className={`h-4 w-4 ${isSubmitting ? "animate-spin" : ""}`} />
                   </button>
                 </form>
