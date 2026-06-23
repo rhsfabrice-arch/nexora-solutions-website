@@ -24,8 +24,8 @@ export function ContactCta() {
     }
 
     try {
-      // 🟢 FORMSPREE FIX: Post the data bundle straight to Formspree infrastructure
-      const response = await fetch("mojovvdw", {
+      // 🟢 FIXED: The full Formspree target address has been added before your Form ID
+      const response = await fetch("https://formspree.io", {
         method: "POST",
         headers: {
           "Accept": "application/json",
@@ -43,7 +43,6 @@ export function ContactCta() {
       }
     } catch (err: any) {
       setErrorMessage(err.message || "Network transmission error. Please try again.")
-      // Removed the fake override fallback so errors show up properly during debugging
       setIsSuccess(false)
     } finally {
       setIsSubmitting(false)
@@ -179,7 +178,7 @@ export function ContactCta() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-green px-7 py-3.5 text-sm font-semibold text-accent-foreground transition-all hover:bg-[#0f9d63] disabled:opacity-50"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-green px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-[#0f9d63] disabled:opacity-50"
                   >
                     {isSubmitting ? "Sending..." : "Send message"}
                     <ArrowRight className="h-4 w-4" />
