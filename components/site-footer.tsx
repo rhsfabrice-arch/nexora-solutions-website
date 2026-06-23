@@ -4,18 +4,37 @@ import React, { useState } from "react"
 import Link from "next/link"
 import { NexoraMark } from "@/components/nexora-mark"
 
+// 🟢 FIXED: Transformed the columns array to contain explicit anchor IDs matching your home page sections
 const columns = [
   {
     title: "Services",
-    links: ["IT Services", "Consulting", "QuickBooks", "POS Systems", "Taxation"],
+    links: [
+      { label: "IT Services", href: "#services" },
+      { label: "Consulting", href: "#services" }, // Points to the services overview grid block
+      { label: "QuickBooks", href: "#services" },
+      { label: "POS Systems", href: "#services" },
+      { label: "Taxation", href: "#services" },
+    ],
   },
   {
     title: "Company",
-    links: ["About", "Why Nexora", "Process", "Industries", "Careers"],
+    links: [
+      { label: "About", href: "#why" },       // Points to the "Why Nexora" overview row
+      { label: "Why Nexora", href: "#why" },
+      { label: "Process", href: "#process" }, // Points to your work process roadmap sequence
+      { label: "Industries", href: "#industries" },
+      { label: "Careers", href: "#contact" },  // Fallback to contact section until careers page exists
+    ],
   },
   {
     title: "Resources",
-    links: ["Blog", "Case Studies", "Support", "Privacy", "Terms"],
+    links: [
+      { label: "Blog", href: "#" },
+      { label: "Case Studies", href: "#" },
+      { label: "Support", href: "#contact" },
+      { label: "Privacy", href: "#" },
+      { label: "Terms", href: "#" },
+    ],
   },
 ]
 
@@ -36,7 +55,6 @@ export function SiteFooter() {
             >
               <NexoraMark className="h-9 w-9" isParentHovered={isBrandHovered} />
               
-              {/* 🟢 INTENSE FOOTER GLOW MATCH */}
               <span 
                 className={`font-heading text-xl font-extrabold tracking-tight text-navy transition-all duration-300 ${
                   isBrandHovered ? "text-green [text-shadow:0_0_25px_#10b981,0_0_10px_rgba(16,185,129,0.6)] transform translate-x-1" : ""
@@ -93,10 +111,14 @@ export function SiteFooter() {
                 {col.title}
               </h3>
               <ul className="mt-4 space-y-3">
+                {/* 🟢 FIXED MAPPER: Updated loop logic to correctly parse individual link object values */}
                 {col.links.map((link) => (
-                  <li key={link}>
-                    <Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-green">
-                      {link}
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-muted-foreground transition-colors hover:text-green"
+                    >
+                      {link.label}
                     </Link>
                   </li>
                 ))}
