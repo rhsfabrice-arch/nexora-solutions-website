@@ -2,15 +2,7 @@
 
 import React, { useState } from "react"
 
-// Strict TypeScript declaration for data structure parameters
-interface ServiceItem {
-  title: string
-  shortDesc: string
-  longDesc: string
-  icon: string
-}
-
-const servicesList: ServiceItem[] = [
+const servicesList = [
   {
     title: "IT Services",
     shortDesc: "Enterprise-grade infrastructure & support.",
@@ -37,69 +29,62 @@ const servicesList: ServiceItem[] = [
   }
 ]
 
-export default function ServicesSection() {
-  // Safe numerical state control for interactive dropdown execution
+export default function Services() {
   const [openCard, setOpenCard] = useState<number | null>(null)
 
-  const toggleCard = (index: number): void => {
-    setOpenCard(openCard === index ? null : index)
-  }
-
   return (
-    <section id="services" className="py-20 bg-slate-50 relative z-10 block clear-both">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="services" style={{ padding: "80px 0", backgroundColor: "#f8fafc", position: "relative", zIndex: 10 }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
         
-        {/* Header Content */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+        {/* Header */}
+        <div style={{ textAlign: "center", marginBottom: "60px" }}>
+          <h2 style={{ fontSize: "32px", fontWeight: 800, color: "#0f172a", marginBottom: "16px" }}>
             Our Business Solutions
           </h2>
-          <p className="mt-4 text-lg text-slate-600 leading-relaxed">
+          <p style={{ fontSize: "18px", color: "#475569" }}>
             Click on any solution card below to expand and explore our core corporate implementation parameters.
           </p>
         </div>
 
-        {/* INTERACTIVE COMPACT GRID */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Flex Layout Grid (No broken CSS configurations) */}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "24px", justifyContent: "center" }}>
           {servicesList.map((service, idx) => {
             const isOpen = openCard === idx
             
             return (
               <div 
                 key={service.title}
-                onClick={() => toggleCard(idx)}
-                className={`flex flex-col p-6 rounded-2xl border transition-all duration-300 cursor-pointer select-none ${
-                  isOpen 
-                    ? "border-emerald-500 bg-emerald-50 shadow-md" 
-                    : "border-slate-200 bg-white hover:border-slate-300 hover:shadow-lg"
-                }`}
+                onClick={() => setOpenCard(isOpen ? null : idx)}
+                style={{ 
+                  flex: "1 1 250px", 
+                  maxWidth: "280px",
+                  padding: "24px", 
+                  borderRadius: "16px", 
+                  border: isOpen ? "2px solid #10b981" : "1px solid #e2e8f0", 
+                  backgroundColor: isOpen ? "#f0fdf4" : "#ffffff", 
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)"
+                }}
               >
-                {/* Icon Wrapper */}
-                <div className={`text-3xl mb-4 flex h-12 w-12 items-center justify-center rounded-xl transition-colors duration-300 ${
-                  isOpen ? "bg-emerald-500 text-white" : "bg-slate-100 text-slate-800"
-                }`}>
-                  {service.icon}
-                </div>
+                {/* Icon */}
+                <div style={{ fontSize: "32px", marginBottom: "16px" }}>{service.icon}</div>
 
                 {/* Title */}
-                <h3 className="text-lg font-bold text-slate-900 mb-2 flex items-center justify-between">
+                <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "#0f172a", marginBottom: "8px", display: "flex", justifyContent: "between", alignItems: "center" }}>
                   <span>{service.title}</span>
-                  <span className={`text-xs font-semibold px-2 py-0.5 rounded transition-transform duration-300 ${
-                    isOpen ? "bg-emerald-100 text-emerald-800 rotate-180" : "bg-slate-100 text-slate-500"
-                  }`}>
-                    ▼
-                  </span>
+                  <span style={{ fontSize: "12px", color: "#64748b", marginLeft: "10px" }}>{isOpen ? "▲" : "▼"}</span>
                 </h3>
 
-                {/* Short Description */}
-                <p className="text-sm text-slate-600 leading-relaxed font-medium mb-2">
+                {/* Short Text */}
+                <p style={{ fontSize: "14px", color: "#475569", lineHeight: "1.5" }}>
                   {service.shortDesc}
                 </p>
 
-                {/* Dropdown Description (Shows dynamically) */}
+                {/* Dropdown Animation Text */}
                 {isOpen && (
-                  <div className="mt-2 pt-2 border-t border-dashed border-slate-200 opacity-100 transition-opacity duration-300">
-                    <p className="text-xs text-slate-600 leading-relaxed bg-white/60 p-3 rounded-xl border border-slate-100">
+                  <div style={{ marginTop: "12px", paddingTop: "12px", borderTop: "1px dashed #cbd5e1" }}>
+                    <p style={{ fontSize: "13px", color: "#334155", lineHeight: "1.6" }}>
                       {service.longDesc}
                     </p>
                   </div>
