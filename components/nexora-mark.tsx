@@ -13,74 +13,80 @@ export function NexoraMark({ className, isParentHovered = false }: { className?:
 
   useEffect(() => {
     if (isClicked) {
-      const timer = setTimeout(() => setIsClicked(false), 800)
+      const timer = setTimeout(() => setIsClicked(false), 600)
       return () => clearTimeout(timer)
     }
   }, [isClicked])
 
   return (
     <>
+      {/* 🟢 PREMIUM CLIENT ANIMATIONS Matrix */}
       <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes logoMotion {
-          0%, 100% { transform: translateY(0px) scale(1.15); }
-          50% { transform: translateY(-4px) scale(1.18); }
+        @keyframes premiumBreathe {
+          0%, 100% { transform: scale(1.05); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08)); }
+          50% { transform: scale(1.08) translateY(-1px); filter: drop-shadow(0 6px 12px rgba(16, 185, 129, 0.08)); }
         }
-        @keyframes burstGlow {
-          0% { transform: scale(1.15); filter: drop-shadow(0 0 0px rgba(16, 185, 129, 0)); }
-          30% { transform: scale(1.35); filter: drop-shadow(0 0 25px rgba(16, 185, 129, 0.9)); }
-          100% { transform: scale(1.15); filter: drop-shadow(0 0 0px rgba(16, 185, 129, 0)); }
+        @keyframes luxuryShimmer {
+          0% { left: -150%; }
+          50%, 100% { left: 150%; }
         }
-        .base-logo-motion {
-          /* 🟢 CONTROLLED TRANSFORMS: Scaled and anchored centered to prevent touching adjacent text strings */
-          transform: scale(1.15);
-          transform-origin: center center;
-          animation: logoMotion 4s ease-in-out infinite;
-          transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        @keyframes elegantBurst {
+          0% { transform: scale(1.08); filter: brightness(1); }
+          40% { transform: scale(1.18); filter: brightness(1.4) drop-shadow(0 0 20px rgba(16, 185, 129, 0.6)); }
+          100% { transform: scale(1.05); filter: brightness(1); }
+        }
+        .premium-motion-container {
+          animation: premiumBreathe 5s ease-in-out infinite;
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           z-index: 10;
         }
-        .brand-hover-active {
-          filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.8)) brightness(1.1);
-          transform: translateY(-2px) scale(1.2) !important;
+        /* 🟢 TWISTED GLOW: Ultra-elegant ambient bloom instead of harsh shadows */
+        .brand-hover-glow-active {
+          transform: scale(1.12) translateY(-1px) !important;
+          filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.4)) brightness(1.05) !important;
         }
         .click-burst-active {
-          animation: burstGlow 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-          z-index: 50;
+          animation: elegantBurst 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        /* 🟢 GLOWING SQUARE: Big square plate template positioned directly behind your logo asset */
-        .glowing-bg-square {
+        /* Shimmer overlay element */
+        .shimmer-track {
           position: absolute;
-          top: -12px;
-          left: -12px;
-          right: -12px;
-          bottom: -12px;
-          background: rgba(16, 185, 129, 0.04);
-          border: 1px solid rgba(16, 185, 129, 0);
-          border-radius: 14px;
+          top: 0; left: -150%; width: 50%; height: 100%;
+          background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+          transform: skewX(-25deg);
+        }
+        .run-shimmer {
+          animation: luxuryShimmer 3s ease-in-out infinite;
+        }
+        /* 🟢 AMBIENT BACKDROP PANEL: Soft frosted plate */
+        .premium-bg-plate {
+          position: absolute;
+          top: -10px; left: -10px; right: -10px; bottom: -10px;
+          background: radial-gradient(circle, rgba(16, 185, 129, 0.06) 0%, rgba(16, 185, 129, 0) 70%);
+          border-radius: 12px;
           opacity: 0;
-          transform: scale(0.85);
-          transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+          transform: scale(0.9);
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           pointer-events: none;
           z-index: 1;
         }
-        .square-hover-active {
+        .plate-hover-active {
           opacity: 1;
           transform: scale(1);
-          background: rgba(16, 185, 129, 0.08);
-          border: 1px solid rgba(16, 185, 129, 0.25);
-          box-shadow: 0 0 25px rgba(16, 185, 129, 0.15), inset 0 0 12px rgba(16, 185, 129, 0.1);
-          backdrop-filter: blur(4px);
+          background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.02) 60%);
+          box-shadow: 0 4px 20px rgba(16, 185, 129, 0.08);
         }
       `}} />
 
-      <div className="relative inline-block select-none">
-        {/* Glowing square background layer element mapping states */}
-        <div className={`glowing-bg-square ${isParentHovered ? "square-hover-active" : ""}`} />
+      <div className="relative inline-block select-none overflow-visible">
+        {/* Soft elegant bloom background plate */}
+        <div className={`premium-bg-plate ${isParentHovered ? "plate-hover-active" : ""}`} />
         
-        {/* Core Image container mapping interactive frames */}
+        {/* Core Logo Wrapper Frame */}
         <div 
           onClick={handleClick}
-          className={`relative cursor-pointer ${className || "h-9 w-9"} ${
-            isClicked ? "click-burst-active" : `base-logo-motion ${isParentHovered ? "brand-hover-active" : ""}`
+          className={`relative cursor-pointer overflow-hidden rounded-md ${className || "h-9 w-9"} ${
+            isClicked ? "click-burst-active" : `premium-motion-container ${isParentHovered ? "brand-hover-glow-active" : ""}`
           }`}
         >
           <Image
@@ -90,6 +96,8 @@ export function NexoraMark({ className, isParentHovered = false }: { className?:
             priority
             className="object-contain"
           />
+          {/* Light-beam sweep reflection overlay */}
+          <div className={`shimmer-track ${!isParentHovered ? "run-shimmer" : ""}`} />
         </div>
       </div>
     </>
