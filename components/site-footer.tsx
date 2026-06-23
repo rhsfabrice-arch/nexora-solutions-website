@@ -1,9 +1,16 @@
-"use client" // 🟢 FIXED: This structural rule tells Next.js to render the social icons safely
+"use client"
 
+import React from "react"
 import Link from "next/link"
 import { NexoraMark } from "@/components/nexora-mark"
-// Importing clean social icons from your lucide-react package
-import { Linkedin, Twitter, Facebook, Instagram } from "lucide-react"
+// 🟢 FIXED: Import LucideIcon type definition to make TypeScript happy
+import { Linkedin, Twitter, Facebook, Instagram, type LucideIcon } from "lucide-react"
+
+interface SocialLink {
+  name: string
+  href: string
+  icon: LucideIcon // 🟢 FIXED: Explicitly tell TypeScript this is a valid icon component type
+}
 
 const columns = [
   {
@@ -20,26 +27,26 @@ const columns = [
   },
 ]
 
-// Centralized interactive social handle destinations
-const socialLinks = [
+// 🟢 FIXED: Attached the SocialLink interface array layout
+const socialLinks: SocialLink[] = [
   {
     name: "LinkedIn",
-    href: "https://linkedin.com", // Replace with your real page address later
+    href: "https://linkedin.com", 
     icon: Linkedin,
   },
   {
     name: "X / Twitter",
-    href: "https://x.com", // Replace with your real page address later
+    href: "https://x.com", 
     icon: Twitter,
   },
   {
     name: "Facebook",
-    href: "https://facebook.com", // Replace with your real page address later
+    href: "https://facebook.com", 
     icon: Facebook,
   },
   {
     name: "Instagram",
-    href: "https://instagram.com", // Replace with your real page address later
+    href: "https://instagram.com", 
     icon: Instagram,
   },
 ]
@@ -91,7 +98,7 @@ export function SiteFooter() {
             <p className="text-sm text-muted-foreground">Business Solutions · East Africa</p>
           </div>
 
-          {/* Clean, interactive horizontal social media ribbon grid mapping */}
+          {/* Clickable social links horizontal placement matrix */}
           <div className="flex items-center gap-5">
             {socialLinks.map((social) => {
               const IconComponent = social.icon
