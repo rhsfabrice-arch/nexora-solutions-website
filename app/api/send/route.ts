@@ -4,23 +4,19 @@ export async function POST(request: Request) {
   try {
     const data = await request.json()
 
-    // Your private Resend key token
-    const RESEND_API_KEY = "re_A4tCBpoZ_BVxWHkxYHsavSnk3VswpRrjy"
+    // 🟢 REPLACEMENT 1: Replace this placeholder text with your brand new Resend token
+    const RESEND_API_KEY = "re_h3BjWBxL_2ix4md2auSY9WtzSjnTB9xjW"
 
-    // Secure backend server dispatch call straight to Resend's delivery pipeline
-    const emailResponse = await fetch("https://resend.com", {
+    // 🟢 REPLACEMENT 2: Fixed Endpoint URL from resend.com to ://resend.com
+    const emailResponse = await fetch("https://://resend.com", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${RESEND_API_KEY}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: "onboarding@resend.dev", // Free sandbox secure origin address
-        
-        // 🟢 FIX: We are ONLY sending to your verified personal registration email profile. 
-        // This removes the custom domain block that was causing Resend to drop your emails.
+        from: "onboarding@resend.dev", 
         to: "nexorasolutionsrw@gmail.com", 
-        
         subject: `Nexora Corporate Lead: ${data.name || "New Submission"}`,
         html: `
           <div style="font-family: sans-serif; padding: 20px; color: #0b1f35; background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0;">
