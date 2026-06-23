@@ -7,12 +7,6 @@ import { Mail, Phone, MapPin, ArrowRight, CheckCircle2 } from "lucide-react"
 // 🔴 PASTE YOUR 8-CHARACTER FORMSPREE ID BETWEEN THE QUOTES HERE:
 const FORMSPREE_FORM_ID = "https://formspree.io/f/xjgqvbry"
 
-const contactItems = [
-  { icon: Mail, label: "Email", value: "info@nexorasolutionsrw.qzz.io" },
-  { icon: Phone, label: "Phone", value: "+250 789 671 130" },
-  { icon: MapPin, label: "Office", value: "Kigali, Rwanda · East Africa" },
-]
-
 export function ContactCta() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -73,19 +67,64 @@ export function ContactCta() {
               </p>
 
               <ul className="mt-10 space-y-5">
-                {contactItems.map((c) => (
-                  <li key={c.label} className="flex items-center gap-4">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-green">
-                      <c.icon className="h-5 w-5" />
+                {/* CLICKABLE EMAIL LINK */}
+                <li className="flex items-center gap-4">
+                  <a 
+                    href="mailto:info@nexorasolutionsrw.qzz.io" 
+                    className="group flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-white/10 text-green transition-all duration-300 hover:bg-green/20 hover:scale-105"
+                    aria-label="Send Email"
+                  >
+                    <Mail className="h-5 w-5" />
+                  </a>
+                  <div>
+                    <span className="block text-xs uppercase tracking-wider text-white/50">
+                      Email
                     </span>
-                    <span>
-                      <span className="block text-xs uppercase tracking-wider text-white/50">
-                        {c.label}
-                      </span>
-                      <span className="font-medium text-white">{c.value}</span>
+                    <a 
+                      href="mailto:info@nexorasolutionsrw.qzz.io" 
+                      className="font-medium text-white transition-colors duration-200 hover:text-green hover:underline"
+                    >
+                      info@nexorasolutionsrw.qzz.io
+                    </a>
+                  </div>
+                </li>
+
+                {/* CLICKABLE PHONE LINK */}
+                <li className="flex items-center gap-4">
+                  <a 
+                    href="tel:+250789671130" 
+                    className="group flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-white/10 text-green transition-all duration-300 hover:bg-green/20 hover:scale-105"
+                    aria-label="Call Phone Number"
+                  >
+                    <Phone className="h-5 w-5" />
+                  </a>
+                  <div>
+                    <span className="block text-xs uppercase tracking-wider text-white/50">
+                      Phone
                     </span>
-                  </li>
-                ))}
+                    <a 
+                      href="tel:+250789671130" 
+                      className="font-medium text-white transition-colors duration-200 hover:text-green hover:underline"
+                    >
+                      +250 789 671 130
+                    </a>
+                  </div>
+                </li>
+
+                {/* OFFICE LOCATION (STANDARD UNCLICKABLE TEXT) */}
+                <li className="flex items-center gap-4">
+                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-white/10 text-green">
+                    <MapPin className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <span className="block text-xs uppercase tracking-wider text-white/50">
+                      Office
+                    </span>
+                    <span className="font-medium text-white">
+                      Kigali, Rwanda · East Africa
+                    </span>
+                  </div>
+                </li>
               </ul>
             </div>
 
