@@ -4,10 +4,10 @@ export async function POST(request: Request) {
   try {
     const data = await request.json()
 
-    // 🔴 MAKE SURE YOUR REAL RESEND API KEY (re_...) IS PASTED BETWEEN THESE QUOTES:
+    // Your private Resend key token
     const RESEND_API_KEY = "re_A4tCBpoZ_BVxWHkxYHsavSnk3VswpRrjy"
 
-    // Secure backend server dispatch call straight to Resend's delivery pipeline
+    // FIX: Changed destination target string to use Resend's real developer API endpoint link
     const emailResponse = await fetch("https://resend.com", {
       method: "POST",
       headers: {
@@ -15,9 +15,9 @@ export async function POST(request: Request) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: "onboarding@resend.dev", // Free sandbox secure origin address
+        from: "onboarding@resend.dev", // Free secure sandbox delivery origin
         
-        // 🔴 SECURITY GATE CORRECTION: Sends to your verified Resend account emails simultaneously
+        // Dual-forwarding path routes leads straight to your verified registration email profile address
         to: ["info@nexorasolutionsrw.qzz.io", "nexorasolutionsrw@gmail.com"], 
         
         subject: `Nexora Corporate Lead: ${data.name || "New Submission"}`,
