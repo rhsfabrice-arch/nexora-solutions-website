@@ -24,14 +24,16 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-border bg-secondary">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            {/* 🟢 FIXED PLACEMENT: Increased gap-5 cushion space prevents the moving logo from touching the letters */}
-            <div 
+            {/* 🟢 FIXED: Wrapped the logo and text in a Next.js Link pointing to the top hero section */}
+            <Link 
+              href="#"
               onMouseEnter={() => setIsBrandHovered(true)}
               onMouseLeave={() => setIsBrandHovered(false)}
-              className="inline-flex items-center gap-5 cursor-pointer group select-none relative pl-2 py-2"
+              className="inline-flex items-center gap-5 cursor-pointer group select-none relative pl-2 py-2 transition-all duration-200"
+              aria-label="Back to top hero landing page"
             >
               <NexoraMark className="h-9 w-9" isParentHovered={isBrandHovered} />
               
@@ -42,7 +44,7 @@ export function SiteFooter() {
               >
                 NEXORA Solutions
               </span>
-            </div>
+            </Link>
 
             <p className="mt-5 max-w-xs text-pretty leading-relaxed text-muted-foreground">
               Enterprise-grade IT, consulting, and accounting technology
