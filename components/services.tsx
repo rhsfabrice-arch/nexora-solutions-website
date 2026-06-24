@@ -76,6 +76,19 @@ export function Services() {
 
   return (
     <section id="services" className="bg-background py-20 lg:py-28 select-none relative">
+      {/* 🟢 INJECTED KEYFRAMES: Appends temporary sliding light sheen styles straight into your HTML header */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes sweep {
+          0% { transform: translateX(-150%) skewX(-25deg); opacity: 0; }
+          15% { opacity: 0.6; }
+          30% { transform: translateX(150%) skewX(-25deg); opacity: 0; }
+          100% { transform: translateX(150%) skewX(-25deg); opacity: 0; }
+        }
+        .animate-glow-sweep {
+          animation: sweep 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+      `}} />
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
           <span className="text-sm font-semibold uppercase tracking-wider text-green">
@@ -126,7 +139,12 @@ export function Services() {
             className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-card shadow-2xl border border-border flex flex-col md:flex-row transition-all duration-300"
             onClick={(e) => e.stopPropagation()} 
           >
+            {/* Left Graphic Column */}
             <div className={`w-full md:w-2/5 p-8 flex flex-col justify-between text-white relative overflow-hidden ${activeService.bgPattern}`}>
+              
+              {/* 🟢 GLOWING SWEEP LIGHT EFFECT: An absolute layer that continuously slides left-to-right */}
+              <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none transform -skew-x-12 animate-glow-sweep" />
+
               <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-white/10 blur-2xl pointer-events-none" />
               <div className="absolute -left-10 -bottom-10 w-45 h-45 rounded-full bg-black/20 blur-xl pointer-events-none" />
               
@@ -144,6 +162,7 @@ export function Services() {
               </div>
             </div>
 
+            {/* Right Information Column */}
             <div className="w-full md:w-3/5 p-8 flex flex-col justify-between bg-card relative">
               <button 
                 onClick={() => setActiveModalIdx(null)}
@@ -174,24 +193,3 @@ export function Services() {
               <div className="mt-8 flex items-center justify-between gap-4 border-t border-border pt-4">
                 <Link 
                   href={`/services/${activeService.slug}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-green hover:text-navy hover:underline transition-colors duration-200 group/link"
-                >
-                  View full landing page
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                </Link>
-
-                <button 
-                  onClick={() => setActiveModalIdx(null)}
-                  className="px-5 py-2.5 bg-navy text-white text-xs font-bold rounded-xl hover:bg-green shadow-md transition-all duration-200"
-                >
-                  Close
-                </button>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      )}
-    </section>
-  )
-}
