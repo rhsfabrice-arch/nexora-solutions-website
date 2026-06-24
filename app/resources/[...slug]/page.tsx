@@ -26,14 +26,14 @@ const resourcesContent: Record<string, { subtitle: string; description: string }
 }
 
 interface PageProps {
-  params: { slug: string | string[] }
+  params: Promise<{ slug: string[] }>
 }
 
-export default function ResourcesCatchAll({ params }: PageProps) {
-  // 🟢 FIXED: Safely extracts the string from the dynamic routing catch-all array
-  const currentSlug = Array.isArray(params?.slug) 
-    ? params.slug[0] 
-    : params?.slug || ""
+// 🟢 ASYNC COMPONENT: Resolves array properties directly from async promises
+export default async function ResourcesCatchAll({ params }: PageProps) {
+  const resolvedParams = await params
+  const slugArray = resolvedParams?.slug || []
+  const currentSlug = slugArray[0] || ""
 
   const title = currentSlug.replace("-", " ").toUpperCase()
   const pageData = resourcesContent[currentSlug] || {
