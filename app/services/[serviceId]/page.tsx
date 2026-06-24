@@ -27,17 +27,20 @@ const servicesContent: Record<string, { subtitle: string; description: string }>
 
 interface PageProps {
   params: {
-    serviceId: string | string[]
+    serviceId: any
   }
 }
 
 export default function DynamicServicePage({ params }: PageProps) {
-  // 🟢 FIXED: Safely extracts the string from an array if Next.js passes it as one
-  const serviceSlug = Array.isArray(params?.serviceId) 
-    ? params.serviceId[0] 
-    : params?.serviceId || ""
+  // 🟢 EXTRACT STRING: Checks array properties to capture target string keys directly
+  const rawId = params?.serviceId
+  const serviceSlug = Array.isArray(rawId) 
+    ? rawId[0] 
+    : typeof rawId === "object" 
+      ? Object.values(rawId)[0] || "" 
+      : rawId || ""
 
-  const title = serviceSlug.replace("-", " ").toUpperCase()
+  const title = String(serviceSlug).replace("-", " ").toUpperCase()
   const pageData = servicesContent[serviceSlug] || {
     subtitle: "Nexora Specialized Enterprise Operations",
     description: "Discover custom, reliable solutions for our systems tailored to empower your business operations and fuel growth across East Africa.",
