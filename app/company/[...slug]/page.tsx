@@ -14,16 +14,19 @@ const companyContent: Record<string, { subtitle: string; description: string }> 
 }
 
 interface PageProps {
-  params: { slug: string | string[] }
+  params: { slug: any }
 }
 
 export default function CompanyCatchAll({ params }: PageProps) {
-  // 🟢 FIXED: Safely extracts the string from the dynamic routing catch-all array
-  const currentSlug = Array.isArray(params?.slug) 
-    ? params.slug[0] 
-    : params?.slug || ""
+  // 🟢 EXTRACT STRING: Checks array properties to capture target string keys directly
+  const rawSlug = params?.slug
+  const currentSlug = Array.isArray(rawSlug) 
+    ? rawSlug[0] 
+    : typeof rawSlug === "object" 
+      ? Object.values(rawSlug)[0] || "" 
+      : rawSlug || ""
 
-  const title = currentSlug.replace("-", " ").toUpperCase()
+  const title = String(currentSlug).replace("-", " ").toUpperCase()
   const pageData = companyContent[currentSlug] || {
     subtitle: "Nexora Corporate Operations Center",
     description: "Our organizational framework modules, corporate compliance parameters, and industrial consultation structures are active for this segment.",
