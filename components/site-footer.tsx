@@ -1,9 +1,16 @@
+"use client"
+
+import React, { useState } from "react"
+import Link from "next/link"
+import { NexoraMark } from "@/components/nexora-mark"
+
+// 🟢 FIXED: Transformed the columns array to contain explicit anchor IDs matching your home page sections
 const columns = [
   {
     title: "Services",
     links: [
       { label: "IT Services", href: "#services" },
-      { label: "Consulting", href: "#services" },
+      { label: "Consulting", href: "#services" }, // Points to the services overview grid block
       { label: "QuickBooks", href: "#services" },
       { label: "POS Systems", href: "#services" },
       { label: "Taxation", href: "#services" },
@@ -12,25 +19,24 @@ const columns = [
   {
     title: "Company",
     links: [
-      { label: "About", href: "#why" },
+      { label: "About", href: "#why" },       // Points to the "Why Nexora" overview row
       { label: "Why Nexora", href: "#why" },
-      { label: "Process", href: "#process" },
+      { label: "Process", href: "#process" }, // Points to your work process roadmap sequence
       { label: "Industries", href: "#industries" },
-      { label: "Careers", href: "#contact" }, 
+      { label: "Careers", href: "#contact" },  // Fallback to contact section until careers page exists
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Blog", href: "/blog" },                 // 🟢 CHANGED: Points to /blog page
-      { label: "Case Studies", href: "/case-studies" }, // 🟢 CHANGED: Points to /case-studies page
-      { label: "Support", href: "#contact" },           // Keeps local form anchor
-      { label: "Privacy", href: "/privacy" },           // 🟢 CHANGED: Points to /privacy page
-      { label: "Terms", href: "/terms" },               // 🟢 CHANGED: Points to /terms page
+      { label: "Blog", href: "#" },
+      { label: "Case Studies", href: "#" },
+      { label: "Support", href: "#contact" },
+      { label: "Privacy", href: "#" },
+      { label: "Terms", href: "#" },
     ],
   },
 ]
-
 
 export function SiteFooter() {
   const [isBrandHovered, setIsBrandHovered] = useState(false)
