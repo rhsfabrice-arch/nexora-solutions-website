@@ -4,36 +4,37 @@ import React, { useState } from "react"
 import Link from "next/link"
 import { NexoraMark } from "@/components/nexora-mark"
 
-// 🟢 FIXED: Transformed the columns array to contain explicit anchor IDs matching your home page sections
+// 🟢 FIXED ROUTING: Configured to absolute root paths (/#section) for home sections 
+// and explicit sub-directories (/blog, /support) for dedicated landing pages.
 const columns = [
   {
     title: "Services",
     links: [
-      { label: "IT Services", href: "#services" },
-      { label: "Consulting", href: "#services" }, // Points to the services overview grid block
-      { label: "QuickBooks", href: "#services" },
-      { label: "POS Systems", href: "#services" },
-      { label: "Taxation", href: "#services" },
+      { label: "IT Services", href: "/services/it-services" }, // Dynamic page
+      { label: "Consulting", href: "/services/consulting" },   // Dynamic page
+      { label: "QuickBooks", href: "/services/quickbooks" },   // Dynamic page
+      { label: "POS Systems", href: "/services/pos-systems" }, // Dynamic page
+      { label: "Taxation", href: "/services/taxation" },       // Dynamic page
     ],
   },
   {
     title: "Company",
     links: [
-      { label: "About", href: "#why" },       // Points to the "Why Nexora" overview row
-      { label: "Why Nexora", href: "#why" },
-      { label: "Process", href: "#process" }, // Points to your work process roadmap sequence
-      { label: "Industries", href: "#industries" },
-      { label: "Careers", href: "#contact" },  // Fallback to contact section until careers page exists
+      { label: "About", href: "/#why" },       // Prepend '/' so it works from any sub-page
+      { label: "Why Nexora", href: "/#why" },
+      { label: "Process", href: "/#process" }, 
+      { label: "Industries", href: "/#industries" },
+      { label: "Careers", href: "/careers" },  // Dedicated landing page
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Blog", href: "#" },
-      { label: "Case Studies", href: "#" },
-      { label: "Support", href: "#contact" },
-      { label: "Privacy", href: "#" },
-      { label: "Terms", href: "#" },
+      { label: "Blog", href: "/blog" },                 // Dedicated landing page
+      { label: "Case Studies", href: "/case-studies" }, // Dedicated landing page
+      { label: "Support", href: "/support" },           // Dedicated landing page
+      { label: "Privacy", href: "/privacy-policy" },    // Dedicated landing page
+      { label: "Terms", href: "/terms-of-service" },    // Dedicated landing page
     ],
   },
 ]
@@ -46,8 +47,9 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
+            {/* 🟢 FIXED: Points back to main root homepage instead of empty '#' symbol */}
             <Link 
-              href="#"
+              href="/"
               onMouseEnter={() => setIsBrandHovered(true)}
               onMouseLeave={() => setIsBrandHovered(false)}
               className="inline-flex items-center gap-5 cursor-pointer group select-none relative pl-2 py-2 transition-all duration-200"
@@ -111,7 +113,6 @@ export function SiteFooter() {
                 {col.title}
               </h3>
               <ul className="mt-4 space-y-3">
-                {/* 🟢 FIXED MAPPER: Updated loop logic to correctly parse individual link object values */}
                 {col.links.map((link) => (
                   <li key={link.label}>
                     <Link
