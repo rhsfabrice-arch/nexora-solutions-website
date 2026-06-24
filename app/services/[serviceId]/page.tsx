@@ -1,3 +1,7 @@
+import React from "react"
+import Link from "next/link"
+import { NexoraMark } from "@/components/nexora-mark"
+
 const servicesContent: Record<string, { subtitle: string; description: string }> = {
   "it-services": {
     subtitle: "Reliable Managed IT Support & Infrastructure Services",
@@ -19,4 +23,34 @@ const servicesContent: Record<string, { subtitle: string; description: string }>
     subtitle: "Automated Tax Compliance Systems & Financial Auditing Solutions",
     description: "Take the stress out of regional regulatory compliance. We integrate smart compliance systems directly into your daily transaction networks. Our software solutions automate tax calculations, organize financial logs into clear domestic filing structures, and generate comprehensive end-of-year audit logging maps. We keep your systems perfectly synchronized with the latest regional tax updates, ensuring your business stays fully compliant and audit-ready.",
   },
+}
+
+interface PageProps {
+  params: {
+    serviceId: string
+  }
+}
+
+export default function DynamicServicePage({ params }: PageProps) {
+  const serviceSlug = params?.serviceId || ""
+  const title = serviceSlug.replace("-", " ").toUpperCase()
+  const pageData = servicesContent[serviceSlug] || {
+    subtitle: "Nexora Specialized Enterprise Operations",
+    description: "Discover custom, reliable solutions for our systems tailored to empower your business operations and fuel growth across East Africa.",
+  }
+
+  return (
+    <main className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+      <div className="flex items-center gap-4 border-l-4 border-green pl-4">
+        <Link href="/" className="flex-shrink-0 transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer">
+          <NexoraMark className="h-10 w-10 text-green" isParentHovered={false} />
+        </Link>
+        <div>
+          <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block">{pageData.subtitle}</span>
+          <h1 className="mt-0.5 text-4xl font-extrabold text-navy tracking-tight">{title || "SERVICE"}</h1>
+        </div>
+      </div>
+      <p className="mt-6 text-lg leading-relaxed text-muted-foreground max-w-3xl">{pageData.description}</p>
+    </main>
+  )
 }
