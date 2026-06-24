@@ -1,6 +1,8 @@
 "use client"
 
 import React, { useState } from "react"
+// 🟢 IMPORTED Next.js Link component for instant, lightning-fast client routing
+import Link from "next/link" 
 import {
   Server,
   Lightbulb,
@@ -9,13 +11,15 @@ import {
   Calculator,
   LineChart,
   X,
+  ArrowUpRight,
 } from "lucide-react"
 
-// 🟢 EXTENDED STRUCTURE: Added visual anchors and highly specific identifiers for the modal viewports
+// 🟢 LINK CONFIGURATION: Added a clear URL routing slug path variable for each service array card
 const services = [
   {
     icon: Server,
     title: "IT Services",
+    slug: "it-services", // Matches /services/it-services
     desc: "Managed IT, networks, cloud infrastructure, security, and reliable support that keeps your operations running.",
     extendedDesc: "We provide corporate network configuration, server maintenance, active cloud migration security, and proactive 24/7 technical helpdesk support tailored to keep your business workflows scaling smoothly across East Africa.",
     meta: "Infrastructure · Cloud Support · Systems Engineering",
@@ -24,6 +28,7 @@ const services = [
   {
     icon: Lightbulb,
     title: "Business Consulting",
+    slug: "consulting", // Matches /services/consulting
     desc: "Strategic advisory and process optimization to help your enterprise scale efficiently and confidently.",
     extendedDesc: "Our advisory experts analyze your current operational workflows, identify production bottlenecks, design automated pipeline sequences, and structure clear technology roadmaps to optimize overhead costs.",
     meta: "Digital Transformation · Overhead Optimization",
@@ -32,6 +37,7 @@ const services = [
   {
     icon: BookOpenCheck,
     title: "QuickBooks Implementation",
+    slug: "quickbooks", // Matches /services/quickbooks
     desc: "Certified setup, migration, and training on QuickBooks tailored to your accounting workflows.",
     extendedDesc: "Get complete configuration and deployment of point-of-sale systems alongside full cloud QuickBooks ledger integrations, giving management real-time inventory tracking and multi-branch visibility.",
     meta: "Ledger Migration · Auditing Dashboards",
@@ -40,6 +46,7 @@ const services = [
   {
     icon: ScanLine,
     title: "POS Systems",
+    slug: "pos-systems", // Matches /services/pos-systems
     desc: "End-to-end point-of-sale deployment for retail and hospitality, with inventory and payment integration.",
     extendedDesc: "Seamless deployment of custom retail transactional terminals paired with automated inventory count scripts, credit merchant pathways, and localized secure hardware arrays.",
     meta: "Multi-branch Logging · Retail Hardware",
@@ -48,6 +55,7 @@ const services = [
   {
     icon: Calculator,
     title: "Taxation",
+    slug: "taxation", // Matches /services/taxation
     desc: "Compliant tax preparation, filing, and advisory aligned with regional regulatory requirements.",
     extendedDesc: "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
     meta: "Revenue Sync · Compliance Auditing",
@@ -56,6 +64,7 @@ const services = [
   {
     icon: LineChart,
     title: "Accounting Technology",
+    slug: "accounting-technology", // Matches your routing paths
     desc: "Modern financial systems, automation, and reporting that turn your numbers into clear decisions.",
     extendedDesc: "Deploy scalable cloud based data analytics dashboards that bridge corporate accounting workflows with live executive financial planning matrices.",
     meta: "Analytics Dashboards · Forecasting Matrices",
@@ -64,9 +73,7 @@ const services = [
 ]
 
 export function Services() {
-  // Tracks which card index is clicked open for the modal popup overlay
   const [activeModalIdx, setActiveModalIdx] = useState<number | null>(null)
-
   const activeService = activeModalIdx !== null ? services[activeModalIdx] : null
 
   return (
@@ -85,7 +92,7 @@ export function Services() {
           </p>
         </div>
 
-        {/* Core Services Overview Grid */}
+        {/* Overview Grid */}
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s, idx) => (
             <article
@@ -111,27 +118,25 @@ export function Services() {
         </div>
       </div>
 
-      {/* 🟢 IMMERSIVE POPUP MODAL OVERLAY PORTAL */}
+      {/* POPUP MODAL OVERLAY */}
       {activeService && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy/60 backdrop-blur-sm animate-fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy/60 backdrop-blur-sm"
           onClick={() => setActiveModalIdx(null)}
           role="dialog"
           aria-modal="true"
         >
-          {/* Main Container Window */}
           <div 
-            className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-card shadow-2xl border border-border flex flex-col md:flex-row transition-all duration-300 transform scale-100"
-            onClick={(e) => e.stopPropagation()} // Prevents closing modal when clicking inside the window
+            className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-card shadow-2xl border border-border flex flex-col md:flex-row transition-all duration-300"
+            onClick={(e) => e.stopPropagation()} 
           >
-            {/* Left Column Layout: Branded Image & Visual Anchor Placeholder */}
+            {/* Left Graphic Column */}
             <div className={`w-full md:w-2/5 p-8 flex flex-col justify-between text-white relative overflow-hidden ${activeService.bgPattern}`}>
-              {/* Decorative Geometric Light Ring Shapes */}
               <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-white/10 blur-2xl pointer-events-none" />
               <div className="absolute -left-10 -bottom-10 w-45 h-45 rounded-full bg-black/20 blur-xl pointer-events-none" />
               
               <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-md shadow-lg border border-white/20">
-                <activeService.icon className="h-7 w-7 text-white animate-pulse" />
+                <activeService.icon className="h-7 w-7 text-white" />
               </div>
 
               <div className="relative z-10 mt-16 md:mt-0">
@@ -144,9 +149,8 @@ export function Services() {
               </div>
             </div>
 
-            {/* Right Column Layout: Real Technical Descriptions */}
+            {/* Right Information Column */}
             <div className="w-full md:w-3/5 p-8 flex flex-col justify-between bg-card relative">
-              {/* Close Button element anchor */}
               <button 
                 onClick={() => setActiveModalIdx(null)}
                 className="absolute top-5 right-5 p-2 rounded-full border border-border text-muted-foreground hover:bg-secondary hover:text-navy transition-all duration-200"
@@ -173,19 +177,11 @@ export function Services() {
                 </div>
               </div>
 
-              {/* Action Button Navigation Trigger */}
-              <div className="mt-8 flex justify-end">
-                <button 
-                  onClick={() => setActiveModalIdx(null)}
-                  className="px-5 py-2.5 bg-navy text-white text-xs font-bold rounded-xl hover:bg-green shadow-md hover:shadow-lg transition-all duration-200"
+              {/* 🟢 FIXED NAVIGATION ACTION RIBBON */}
+              <div className="mt-8 flex items-center justify-between gap-4 border-t border-border pt-4">
+                {/* Brand new link right next to the button that references our dynamic routes */}
+                <Link 
+                  href={`/services/${activeService.slug}`}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-green hover:text-navy hover:underline transition-colors duration-200 group/link"
                 >
-                  Got it, close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </section>
-  )
-}
+                  View full landing page
