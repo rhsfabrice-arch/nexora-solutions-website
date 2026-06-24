@@ -1,5 +1,6 @@
 import React from "react"
-// 🟢 IMPORTED: Reusing your brand mark component
+// 🟢 IMPORTED: Link component from Next.js to handle client-side routing
+import Link from "next/link"
 import { NexoraMark } from "@/components/nexora-mark"
 
 interface PageProps {
@@ -14,15 +15,18 @@ export default function DynamicServicePage({ params }: PageProps) {
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-      {/* 
-        🟢 FIXED CONTAINER: Added a flex row to cleanly align 
-        your logo mark right alongside the vertical border line 
-      */}
       <div className="flex items-center gap-4 border-l-4 border-green pl-4">
-        {/* Logo Mark wrapper with explicit sizing metrics */}
-        <div className="flex-shrink-0">
+        {/* 
+          🟢 FIXED LINK WRAPPER: Wrapped the logo in a Next.js Link pointing to "/" (homepage).
+          Added hover transitions and a cursor pointer for visual feedback.
+        */}
+        <Link 
+          href="/" 
+          className="flex-shrink-0 transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+          aria-label="Return to Nexora home page"
+        >
           <NexoraMark className="h-10 w-10 text-green" isParentHovered={false} />
-        </div>
+        </Link>
         
         <div>
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block">
