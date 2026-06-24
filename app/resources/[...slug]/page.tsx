@@ -1,22 +1,54 @@
+import React from "react"
+import Link from "next/link"
+import { NexoraMark } from "@/components/nexora-mark"
+
 const resourcesContent: Record<string, { subtitle: string; description: string }> = {
   blog: {
-    subtitle: "Expert Technology Guides, Accounting Tips & Business Insights",
-    description: "Stay informed with practical, expert-curated articles written directly by the senior engineering and consulting teams at Nexora Solutions. From security warnings and cloud migration checklists to point-of-sale management guides and QuickBooks optimization tricks, our blog provides actionable knowledge designed to help business owners protect their data and optimize operations.",
+    subtitle: "Tech Insights & Trends",
+    description: "Stay ahead of the curve with expert technology guides, corporate accounting tips, security updates, and modern point-of-sale breakdowns curated directly by the senior engineering team at Nexora Solutions.",
   },
   support: {
-    subtitle: "24/7 Dedicated Client Technical Support Desk",
-    description: "Nexora is always here when you need us. Our dedicated customer support helpdesk operates 24/7 to resolve infrastructure server issues, network drops, point of sale hitches, or software configuration questions immediately. We offer rapid remote assistance and quick on-site corporate support to keep your operations up and running smoothly without missing a single beat.",
+    subtitle: "24/7 Corporate Technical Desk",
+    description: "Need immediate assistance? Our dedicated technical customer service team is standing by to resolve infrastructure server glitches, point-of-sale transaction issues, accounting setups, or remote workspace network drops.",
   },
   "case-studies": {
-    subtitle: "Real-World Proven Results: Success Stories & Implementations",
-    description: "See how we deliver value. Our detailed case studies show real examples of how Nexora Solutions has overhauled outdated business setups, resolved critical multi-branch inventory tracking issues, and secured financial networks for prominent businesses. Read through our proven track record to discover how we customize our expertise to resolve complex operational challenges.",
+    subtitle: "Real Results For East African Brands",
+    description: "Explore deep-dive technical reviews highlighting how Nexora Solutions completely overhauled outmoded inventory tracking, secured legacy accounting infrastructure, and optimized corporate workflows for regional enterprises.",
   },
   "privacy-policy": {
-    subtitle: "Data Security Compliance & Absolute Client Privacy Protection",
-    description: "At Nexora Solutions, your data privacy is our highest priority. This document outlines our rigorous operational boundaries for handling client data, securing server frameworks, isolating financial databases, and maintaining strict contract confidentiality. We use enterprise-grade end-to-end encryption and isolated security environments to guarantee that your business information is safe and secure with us.",
+    subtitle: "Data Security Compliance Parameters",
+    description: "Nexora Solutions takes data privacy seriously. This document outlines how we securely isolate client server data, manage secure QuickBooks integrations, deploy firewalls, and maintain absolute confidentiality across all enterprise contracts.",
   },
   "terms-of-service": {
-    subtitle: "Standard Legal Operations & Corporate Engineering Framework",
-    description: "Welcome to the Nexora operational framework. These terms outline our clear engineering service level agreements (SLAs), project deployment schedules, software warranty coverages, and continuous support parameters. By establishing transparent expectations and transparent technical boundaries, we guarantee highly reliable, secure service execution for all of our valued enterprise clients.",
+    subtitle: "Legal Operations & Service Framework",
+    description: "Review our standard engineering service level agreements, legal service boundaries, system warranty parameters, and software support framework required for project engagement and cross-regional enterprise infrastructure maintenance.",
   },
+}
+
+interface PageProps {
+  params: { slug: string[] }
+}
+
+export default function ResourcesCatchAll({ params }: PageProps) {
+  const currentSlug = params?.slug?.[0] || ""
+  const title = currentSlug.replace("-", " ").toUpperCase()
+  const pageData = resourcesContent[currentSlug] || {
+    subtitle: "Nexora Client Support Library",
+    description: "Vetted technical architecture blueprints, corporate documentation logs, and regional analytical whitepapers are live for client review.",
+  }
+
+  return (
+    <main className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+      <div className="flex items-center gap-4 border-l-4 border-green pl-4">
+        <Link href="/" className="flex-shrink-0 transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer">
+          <NexoraMark className="h-10 w-10 text-green" isParentHovered={false} />
+        </Link>
+        <div>
+          <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block">{pageData.subtitle}</span>
+          <h1 className="mt-0.5 text-4xl font-extrabold text-navy tracking-tight">{title || "RESOURCE"}</h1>
+        </div>
+      </div>
+      <p className="mt-6 text-lg leading-relaxed text-muted-foreground max-w-3xl">{pageData.description}</p>
+    </main>
+  )
 }
