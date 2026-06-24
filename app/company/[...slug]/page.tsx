@@ -1,51 +1,10 @@
-import React from "react"
-import Link from "next/link"
-import { NexoraMark } from "@/components/nexora-mark"
-
-// 🟢 REAL CONTENT RECORD: Type out your actual page copy here!
 const companyContent: Record<string, { subtitle: string; description: string }> = {
   careers: {
-    subtitle: "Build the Future of IT with Nexora",
-    description: "Join our fast-growing team of enterprise infrastructure engineers, technical consultants, and accounting automation specialists. At Nexora Solutions, we offer competitive benefits, remote flexibility, and the chance to build scalable corporate systems that empower businesses across East Africa.",
+    subtitle: "Build Your Professional Future with Nexora Solutions",
+    description: "Are you passionate about engineering high-impact technology solutions? Nexora Solutions is a rapidly growing hub for enterprise network engineers, technical consultants, and financial software experts. We offer a highly collaborative environment, competitive compensation, continuous professional training, and the unique opportunity to build technology that drives business growth across East Africa. Explore our open positions and build your career with us today.",
   },
   about: {
-    subtitle: "Enterprise-Grade Technology Experts",
-    description: "Founded with a mission to eliminate technical friction, Nexora Solutions engineers top-tier custom IT infrastructures, secure network setups, and point-of-sale systems. We serve corporate clients across East Africa, helping businesses modernize workflows and safely scale operations.",
+    subtitle: "Who We Are: Technology Partner for East African Businesses",
+    description: "Nexora Solutions was founded with a clear mission: to eliminate technical friction and protect corporate assets for growing businesses. We specialize in engineering secure IT infrastructures, deploying streamlined accounting software, and installing reliable point of sale networks. By acting as a trusted technology partner, we help regional enterprises modernize their daily workflows, secure critical databases, and scale confidently.",
   },
-}
-
-interface PageProps {
-  params: { slug: string[] }
-}
-
-export default function CompanyCatchAll({ params }: PageProps) {
-  const currentSlug = params?.slug?.[0] || ""
-  const title = currentSlug.replace("-", " ").toUpperCase()
-
-  // Match the slug to real text, or use a default if it's not typed out yet
-  const pageData = companyContent[currentSlug] || {
-    subtitle: "Nexora Corporate Operations Center",
-    description: "Our organizational framework modules, corporate compliance parameters, and industrial consultation structures are active for this segment.",
-  }
-
-  return (
-    <main className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-      <div className="flex items-center gap-4 border-l-4 border-green pl-4">
-        <Link href="/" className="flex-shrink-0 transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer">
-          <NexoraMark className="h-10 w-10 text-green" isParentHovered={false} />
-        </Link>
-        <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block">
-            {pageData.subtitle}
-          </span>
-          <h1 className="mt-0.5 text-4xl font-extrabold text-navy tracking-tight">
-            {title || "COMPANY"}
-          </h1>
-        </div>
-      </div>
-      <p className="mt-6 text-lg leading-relaxed text-muted-foreground max-w-3xl">
-        {pageData.description}
-      </p>
-    </main>
-  )
 }
