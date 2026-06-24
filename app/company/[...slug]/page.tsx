@@ -14,19 +14,16 @@ const companyContent: Record<string, { subtitle: string; description: string }> 
 }
 
 interface PageProps {
-  params: { slug: any }
+  params: Promise<{ slug: string[] }>
 }
 
-export default function CompanyCatchAll({ params }: PageProps) {
-  // 🟢 EXTRACT STRING: Checks array properties to capture target string keys directly
-  const rawSlug = params?.slug
-  const currentSlug = Array.isArray(rawSlug) 
-    ? rawSlug[0] 
-    : typeof rawSlug === "object" 
-      ? Object.values(rawSlug)[0] || "" 
-      : rawSlug || ""
+// 🟢 ASYNC COMPONENT: Resolves array properties directly from async promises
+export default async function CompanyCatchAll({ params }: PageProps) {
+  const resolvedParams = await params
+  const slugArray = resolvedParams?.slug || []
+  const currentSlug = slugArray[0] || ""
 
-  const title = String(currentSlug).replace("-", " ").toUpperCase()
+  const title = currentSlug.replace("-", " ").toUpperCase()
   const pageData = companyContent[currentSlug] || {
     subtitle: "Nexora Corporate Operations Center",
     description: "Our organizational framework modules, corporate compliance parameters, and industrial consultation structures are active for this segment.",
