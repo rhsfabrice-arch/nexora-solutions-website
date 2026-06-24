@@ -1,190 +1,84 @@
 "use client"
 
 import React, { useState } from "react"
-import Link from "next/link" 
-import {
-  Server,
-  Lightbulb,
-  BookOpenCheck,
-  ScanLine,
-  Calculator,
-  LineChart,
-  X,
-  ArrowUpRight,
-} from "lucide-react"
+import Link from "next/link"
 
-const services = [
-  {
-    icon: Server,
-    title: "IT Services",
-    slug: "it-services",
-    desc: "Managed IT, networks, cloud infrastructure, security, and reliable support that keeps your operations running.",
-    extendedDesc: "We provide corporate network configuration, server maintenance, active cloud migration security, and proactive 24/7 technical helpdesk support tailored to keep your business workflows scaling smoothly across East Africa.",
-    meta: "Infrastructure · Cloud Support · Systems Engineering",
-    bgPattern: "bg-gradient-to-br from-blue-600 to-indigo-900"
-  },
-  {
-    icon: Lightbulb,
-    title: "Business Consulting",
-    slug: "consulting",
-    desc: "Strategic advisory and process optimization to help your enterprise scale efficiently and confidently.",
-    extendedDesc: "Our advisory experts analyze your current operational workflows, identify production bottlenecks, design automated pipeline sequences, and structure clear technology roadmaps to optimize overhead costs.",
-    meta: "Digital Transformation · Overhead Optimization",
-    bgPattern: "bg-gradient-to-br from-emerald-600 to-teal-900"
-  },
-  {
-    icon: BookOpenCheck,
-    title: "QuickBooks Implementation",
-    slug: "quickbooks",
-    desc: "Certified setup, migration, and training on QuickBooks tailored to your accounting workflows.",
-    extendedDesc: "Get complete configuration and deployment of point-of-sale systems alongside full cloud QuickBooks ledger integrations, giving management real-time inventory tracking and multi-branch visibility.",
-    meta: "Ledger Migration · Auditing Dashboards",
-    bgPattern: "bg-gradient-to-br from-orange-500 to-amber-800"
-  },
-  {
-    icon: ScanLine,
-    title: "POS Systems",
-    slug: "pos-systems",
-    desc: "End-to-end point-of-sale deployment for retail and hospitality, with inventory and payment integration.",
-    extendedDesc: "Seamless deployment of custom retail transactional terminals paired with automated inventory count scripts, credit merchant pathways, and localized secure hardware arrays.",
-    meta: "Multi-branch Logging · Retail Hardware",
-    bgPattern: "bg-gradient-to-br from-violet-600 to-purple-950"
-  },
-  {
-    icon: Calculator,
-    title: "Taxation",
-    slug: "taxation",
-    desc: "Compliant tax preparation, filing, and advisory aligned with regional regulatory requirements.",
-    extendedDesc: "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
-    meta: "Revenue Sync · Compliance Auditing",
-    bgPattern: "bg-gradient-to-br from-red-600 to-rose-950"
-  },
-  {
-    icon: LineChart,
-    title: "Accounting Technology",
-    slug: "accounting-technology",
-    desc: "Modern financial systems, automation, and reporting that turn your numbers into clear decisions.",
-    extendedDesc: "Deploy scalable cloud based data analytics dashboards that bridge corporate accounting workflows with live executive financial planning matrices.",
-    meta: "Analytics Dashboards · Forecasting Matrices",
-    bgPattern: "bg-gradient-to-br from-sky-600 to-cyan-950"
-  },
+const servicesList = [
+  { id: "it-services", title: "IT Services", desc: "Managed IT support and cloud infrastructure blueprints." },
+  { id: "consulting", title: "Business Consulting", desc: "Strategic advisory and workflow transformation roadmaps." },
+  { id: "quickbooks", title: "QuickBooks Integration", desc: "Certified setup, file migrations, and custom dashboards." },
+  { id: "pos-systems", title: "POS Systems", desc: "Cloud retail transactional terminals and inventory tracking." },
+  { id: "taxation", title: "Taxation Systems", desc: "Automated regional compliance and automated filing structures." },
+  { id: "accounting-technology", title: "Accounting Technology", desc: "Modern reporting frameworks and cloud ledger integrations." }
 ]
 
 export function Services() {
-  const [activeModalIdx, setActiveModalIdx] = useState<number | null>(null)
-  const activeService = activeModalIdx !== null ? services[activeModalIdx] : null
+  const [activeIdx, setActiveIdx] = useState<number | null>(null)
+  const currentService = activeIdx !== null ? servicesList[activeIdx] : null
 
   return (
-    <section id="services" className="bg-background py-20 lg:py-28 select-none relative">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl">
-          <span className="text-sm font-semibold uppercase tracking-wider text-green">
-            What we do
-          </span>
-          <h2 className="mt-3 text-balance font-heading text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-            Complete business technology, under one roof
-          </h2>
-          <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
-            From infrastructure to accounting, Nexora provides the integrated
-            solutions modern businesses need to grow. Click any card to explore.
-          </p>
+    <section id="services" style={{ padding: "80px 20px", background: "#ffffff" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        
+        <div>
+          <span style={{ color: "#10b981", fontSize: "14px", fontWeight: "bold", uppercase: "true" }}>What we do</span>
+          <h2 style={{ color: "#0b1f35", fontSize: "32px", fontWeight: "800", marginTop: "10px" }}>Complete business technology, under one roof</h2>
+          <p style={{ color: "#6b7280", marginTop: "12px" }}>Click any card below to open interactive operational parameters.</p>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s, idx) => (
-            <article
-              key={s.title}
-              onClick={() => setActiveModalIdx(idx)}
-              className="group relative rounded-2xl border border-border bg-card p-7 shadow-[0_2px_8px_rgba(11,31,53,0.04)] transition-all duration-300 cursor-pointer hover:-translate-y-1 hover:border-green/40 hover:shadow-[0_20px_40px_-20px_rgba(11,31,53,0.2)]"
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px", marginTop: "40px" }}>
+          {servicesList.map((s, idx) => (
+            <div
+              key={s.id}
+              onClick={() => setActiveIdx(idx)}
+              style={{ padding: "28px", border: "1px solid #e5e7eb", borderRadius: "16px", cursor: "pointer", background: "#f9fafb" }}
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green/10 text-green group-hover:bg-green group-hover:text-white transition-all duration-300">
-                <s.icon className="h-6 w-6 group-hover:scale-110 transition-transform duration-300" />
-              </div>
-
-              <h3 className="mt-5 font-heading text-xl font-bold text-navy flex items-center gap-2 group-hover:text-green transition-colors duration-200">
-                {s.title}
-              </h3>
-
-              <p className="mt-2.5 leading-relaxed text-muted-foreground text-sm">{s.desc}</p>
-              
-              <div className="mt-4 text-xs font-semibold text-green inline-flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
-                Learn more <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-              </div>
-            </article>
+              <h3 style={{ color: "#0b1f35", fontSize: "20px", fontWeight: "bold", margin: "0 0 10px 0" }}>{s.title}</h3>
+              <p style={{ color: "#6b7280", fontSize: "14px", margin: "0 0 16px 0" }}>{s.desc}</p>
+              <span style={{ color: "#10b981", fontSize: "12px", fontWeight: "bold" }}>Learn more →</span>
+            </div>
           ))}
         </div>
+
       </div>
 
-      {activeService && (
+      {currentService && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy/60 backdrop-blur-sm"
-          onClick={() => setActiveModalIdx(null)}
-          role="dialog"
-          aria-modal="true"
+          onClick={() => setActiveIdx(null)}
+          style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex", alignItems: "center", justifyCenter: "center", padding: "20px", background: "rgba(11,31,53,0.6)", backdropFilter: "blur(4px)" }}
         >
           <div 
-            className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-card shadow-2xl border border-border flex flex-col md:flex-row transition-all duration-300"
-            onClick={(e) => e.stopPropagation()} 
+            onClick={(e) => e.stopPropagation()}
+            style={{ width: "100%", maxWidth: "600px", background: "#ffffff", borderRadius: "24px", padding: "32px", border: "1px solid #e5e7eb", position: "relative", margin: "auto" }}
           >
-            {/* Left Graphic Column */}
-            <div className={`w-full md:w-2/5 p-8 flex flex-col justify-between text-white relative overflow-hidden ${activeService.bgPattern}`}>
-              
-              {/* 🟢 FIXED GLOW EFFECT: Standard Tailwind pulse overlay to create a moving light look without custom CSS */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 opacity-40 mix-blend-overlay animate-pulse pointer-events-none" />
+            <button 
+              onClick={() => setActiveIdx(null)}
+              style={{ position: "absolute", top: "20px", right: "20px", background: "none", border: "none", fontSize: "20px", cursor: "pointer", color: "#6b7280" }}
+            >
+              ✕
+            </button>
 
-              <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-white/10 blur-2xl pointer-events-none" />
-              <div className="absolute -left-10 -bottom-10 w-45 h-45 rounded-full bg-black/20 blur-xl pointer-events-none" />
-              
-              <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-md shadow-lg border border-white/20">
-                <activeService.icon className="h-7 w-7 text-white" />
-              </div>
+            <span style={{ color: "#10b981", fontSize: "12px", fontWeight: "bold" }}>Integrated System Overview</span>
+            <h4 style={{ color: "#0b1f35", fontSize: "28px", fontWeight: "800", margin: "4px 0 16px 0" }}>{currentService.title}</h4>
+            <p style={{ color: "#6b7280", fontSize: "15px", lineHeight: "1.6" }}>{currentService.desc}</p>
 
-              <div className="relative z-10 mt-16 md:mt-0">
-                <span className="text-[10px] font-bold tracking-widest uppercase opacity-75 block text-white/90">
-                  {activeService.meta}
-                </span>
-                <h4 className="mt-2 text-2xl font-black font-heading tracking-tight leading-tight">
-                  {activeService.title}
-                </h4>
-              </div>
-            </div>
-
-            {/* Right Information Column */}
-            <div className="w-full md:w-3/5 p-8 flex flex-col justify-between bg-card relative">
-              <button 
-                onClick={() => setActiveModalIdx(null)}
-                className="absolute top-5 right-5 p-2 rounded-full border border-border text-muted-foreground hover:bg-secondary hover:text-navy transition-all duration-200"
-                aria-label="Close detail viewport panel"
+            <div style={{ marginTop: "32px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #e5e7eb", paddingTop: "16px" }}>
+              <Link 
+                href={`/services/${currentService.id}`}
+                style={{ fontSize: "13px", fontWeight: "bold", color: "#10b981", textDecoration: "none" }}
               >
-                <X className="h-4 w-4" />
+                View full landing page ↗
+              </Link>
+              <button 
+                onClick={() => setActiveIdx(null)}
+                style={{ padding: "10px 20px", background: "#0b1f35", color: "#ffffff", border: "none", borderRadius: "10px", fontSize: "12px", fontWeight: "bold", cursor: "pointer" }}
+              >
+                Close Window
               </button>
-
-              <div className="pr-2 pt-4 md:pt-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-green">
-                  Service Framework Deep-Dive
-                </span>
-                <h5 className="mt-1 text-xl font-bold text-navy font-heading">
-                  Integrated Engineering Blueprint
-                </h5>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  {activeService.desc}
-                </p>
-                
-                <div className="mt-5 p-4 rounded-xl bg-secondary/80 border border-border/60 shadow-inner">
-                  <p className="text-xs font-medium text-navy leading-relaxed">
-                    {activeService.extendedDesc}
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-8 flex items-center justify-between gap-4 border-t border-border pt-4">
-                <Link 
-                  href={`/services/${activeService.slug}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-green hover:text-navy hover:underline transition-colors duration-200 group/link"
-                >
-                  View full landing page
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                </Link>
-
-                <button 
-                  onClick={() => setActiveModalIdx(null)}
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  )
+}
