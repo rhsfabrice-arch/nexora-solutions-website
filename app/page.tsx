@@ -1,29 +1,24 @@
 import { SiteHeader } from "@/components/site-header"
+import { Hero } from "@/components/hero"
+import { Services } from "@/components/services"
+import { WhyNexora } from "@/components/why-nexora"
+import { Process } from "@/components/process"
+import { Industries } from "@/components/industries"
+import { Testimonials } from "@/components/testimonials"
 import { ContactCta } from "@/components/contact-cta"
 import { SiteFooter } from "@/components/site-footer"
-// Import your other section blocks here (e.g., Hero, Services, Process, etc.)
 
-export default function Home() {
+export default function Page() {
   return (
-    <div className="relative min-h-screen flex flex-col">
+    <div className="min-h-screen bg-background">
       <SiteHeader />
-      <main className="flex-1">
-        {/* 🟢 Drop your main page section components here right in order */}
-        <section id="home">
-          {/* <Hero /> */}
-        </section>
-        <section id="services">
-          {/* <ServicesGrid /> */}
-        </section>
-        <section id="why">
-          {/* <WhyNexora /> */}
-        </section>
-        <section id="process">
-          {/* <ProcessRoadmap /> */}
-        </section>
-        <section id="industries">
-          {/* <IndustriesOverview /> */}
-        </section>
+      <main>
+        <Hero />
+        <Services />
+        <WhyNexora />
+        <Process />
+        <Industries />
+        <Testimonials />
         <ContactCta />
       </main>
       <SiteFooter />
