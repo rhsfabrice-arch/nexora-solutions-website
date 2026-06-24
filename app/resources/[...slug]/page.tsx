@@ -26,11 +26,15 @@ const resourcesContent: Record<string, { subtitle: string; description: string }
 }
 
 interface PageProps {
-  params: { slug: string[] }
+  params: { slug: string | string[] }
 }
 
 export default function ResourcesCatchAll({ params }: PageProps) {
-  const currentSlug = params?.slug?.[0] || ""
+  // 🟢 FIXED: Safely extracts the string from the dynamic routing catch-all array
+  const currentSlug = Array.isArray(params?.slug) 
+    ? params.slug[0] 
+    : params?.slug || ""
+
   const title = currentSlug.replace("-", " ").toUpperCase()
   const pageData = resourcesContent[currentSlug] || {
     subtitle: "Nexora Client Support Library",
