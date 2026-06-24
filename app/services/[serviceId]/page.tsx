@@ -27,12 +27,16 @@ const servicesContent: Record<string, { subtitle: string; description: string }>
 
 interface PageProps {
   params: {
-    serviceId: string
+    serviceId: string | string[]
   }
 }
 
 export default function DynamicServicePage({ params }: PageProps) {
-  const serviceSlug = params?.serviceId || ""
+  // 🟢 FIXED: Safely extracts the string from an array if Next.js passes it as one
+  const serviceSlug = Array.isArray(params?.serviceId) 
+    ? params.serviceId[0] 
+    : params?.serviceId || ""
+
   const title = serviceSlug.replace("-", " ").toUpperCase()
   const pageData = servicesContent[serviceSlug] || {
     subtitle: "Nexora Specialized Enterprise Operations",
