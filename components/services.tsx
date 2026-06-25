@@ -10,7 +10,7 @@ const servicesList = [
     desc: "Managed IT support and cloud infrastructure blueprints.",
     longDesc: "We provide corporate network configuration, server maintenance, active cloud migration security, and proactive 24/7 technical helpdesk support tailored to keep your business workflows scaling smoothly across East Africa.",
     meta: "Infrastructure · Cloud Support · Systems Engineering",
-    gradient: "linear-gradient(135deg, #2563eb, #1e3a8a)",
+    gradient: "linear-gradient(135deg, #1e3a8a, #0f172a)",
     imageUrl: "/images/IT-services.jpeg" 
   },
   { 
@@ -19,7 +19,7 @@ const servicesList = [
     desc: "Strategic advisory and workflow transformation roadmaps.",
     longDesc: "Our advisory experts analyze your current operational workflows, identify production bottlenecks, design automated pipeline sequences, and structure clear technology roadmaps to optimize overhead costs.",
     meta: "Digital Transformation · Overhead Optimization",
-    gradient: "linear-gradient(135deg, #059669, #064e3b)",
+    gradient: "linear-gradient(135deg, #064e3b, #022c22)",
     imageUrl: "/images/Business-Consulting.jpeg" 
   },
   { 
@@ -28,7 +28,7 @@ const servicesList = [
     desc: "Certified setup, file migrations, and custom dashboards.",
     longDesc: "Get complete configuration and deployment of point-of-sale systems alongside full cloud QuickBooks ledger integrations, giving management real-time inventory tracking and multi-branch visibility.",
     meta: "Ledger Migration · Auditing Dashboards",
-    gradient: "linear-gradient(135deg, #f97316, #78350f)",
+    gradient: "linear-gradient(135deg, #78350f, #451a03)",
     imageUrl: "/images/QuickBooks-Integration.jpeg" 
   },
   { 
@@ -37,7 +37,7 @@ const servicesList = [
     desc: "Cloud retail transactional terminals and inventory tracking.",
     longDesc: "Seamless deployment of custom retail transactional terminals paired with automated inventory count scripts, credit merchant pathways, and localized secure hardware arrays.",
     meta: "Multi-branch Logging · Retail Hardware",
-    gradient: "linear-gradient(135deg, #7c3aed, #4c1d95)",
+    gradient: "linear-gradient(135deg, #4c1d95, #2e1065)",
     imageUrl: "/images/POS-Systems.jpeg" 
   },
   { 
@@ -46,7 +46,7 @@ const servicesList = [
     desc: "Automated regional compliance and automated filing structures.",
     longDesc: "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
     meta: "Revenue Sync · Compliance Auditing",
-    gradient: "linear-gradient(135deg, #dc2626, #4c0519)",
+    gradient: "linear-gradient(135deg, #4c0519, #881337)",
     imageUrl: "/images/Taxation-Systems.jpg" 
   },
   { 
@@ -55,7 +55,7 @@ const servicesList = [
     desc: "Modern reporting frameworks and cloud ledger integrations.",
     longDesc: "Deploy scalable cloud based data analytics dashboards that bridge corporate accounting workflows with live executive financial planning matrices.",
     meta: "Analytics Dashboards · Forecasting Matrices",
-    gradient: "linear-gradient(135deg, #0ea5e9, #164e63)",
+    gradient: "linear-gradient(135deg, #164e63, #083344)",
     imageUrl: "/images/Accounting-Technology.jpeg" 
   }
 ]
@@ -66,18 +66,6 @@ export function Services() {
 
   return (
     <section id="services" style={{ padding: "80px 20px", background: "#ffffff", fontFamily: "sans-serif" }}>
-      {/* Smooth 8-second slow glowing sheen animation */}
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes shine {
-          0% { background-position: -200% 0; }
-          100% { background-position: 200% 0; }
-        }
-        .glowing-image-area {
-          background-size: 200% 100% !important;
-          animation: shine 8s linear infinite !important;
-        }
-      `}} />
-
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <div>
           <span style={{ color: "#10b981", fontSize: "14px", fontWeight: "bold" }}>What we do</span>
@@ -114,7 +102,6 @@ export function Services() {
             
             {/* Left Image Column View */}
             <div 
-              className="glowing-image-area"
               style={{
                 flex: "1 1 250px",
                 minHeight: "250px",
@@ -124,12 +111,11 @@ export function Services() {
                 justifyContent: "space-between",
                 color: "#ffffff",
                 position: "relative",
-                backgroundImage: `linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent), ${currentService.gradient}`,
-                backgroundBlendMode: "overlay"
+                background: currentService.gradient,
+                overflow: "hidden"
               }}
             >
-              {/* 🟢 RESOLVED BALANCING: Placed image directly on z-index 2 over the background, 
-                  removed luminosity mode to fix color, and used opacity 0.9 for maximum resolution */}
+              {/* 🟢 RESOLVED: Images placed at full clarity with a balanced overlay highlight beam */}
               {currentService.imageUrl && (
                 <>
                   <img 
@@ -141,18 +127,28 @@ export function Services() {
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
-                      opacity: 0.9, 
+                      opacity: 0.85, 
                       mixBlendMode: "normal", 
                       pointerEvents: "none",
-                      zIndex: 2
+                      zIndex: 1
                     }}
                   />
-                  {/* Soft dark vignette filter running directly over the crisp picture to anchor the white fonts */}
+                  {/* Soft light sweep overlay running directly in front of the color images */}
                   <div 
                     style={{
                       position: "absolute",
                       inset: 0,
-                      background: "linear-gradient(to top, rgba(11,31,53,0.9) 35%, rgba(11,31,53,0.2) 100%)",
+                      background: "linear-gradient(115deg, rgba(255,255,255,0) 20%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 80%)",
+                      zIndex: 2,
+                      pointerEvents: "none"
+                    }}
+                  />
+                  {/* Protective text vignette shadow gradient */}
+                  <div 
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(to top, rgba(15,23,42,0.85) 40%, rgba(15,23,42,0.2) 100%)",
                       zIndex: 3,
                       pointerEvents: "none"
                     }}
@@ -160,13 +156,12 @@ export function Services() {
                 </>
               )}
 
-              {/* Text content placed on z-index 10 to stay safely on top */}
-              <div style={{ fontSize: "24px", position: "relative", zIndex: 10, textShadow: "0 2px 4px rgba(0,0,0,0.4)" }}>💎</div>
+              <div style={{ fontSize: "24px", position: "relative", zIndex: 10, textShadow: "0 2px 4px rgba(0,0,0,0.5)" }}>💎</div>
               <div style={{ position: "relative", zIndex: 10 }}>
-                <span style={{ fontSize: "10px", fontWeight: "bold", tracking: "wider", opacity: 0.9, textTransform: "uppercase", display: "block", textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>
+                <span style={{ fontSize: "10px", fontWeight: "bold", tracking: "wider", opacity: 0.9, textTransform: "uppercase", display: "block", textShadow: "0 1px 3px rgba(0,0,0,0.6)" }}>
                   {currentService.meta}
                 </span>
-                <h4 style={{ fontSize: "24px", fontWeight: "900", margin: "6px 0 0 0", lineHeight: "1.2", textShadow: "0 2px 6px rgba(0,0,0,0.6)" }}>
+                <h4 style={{ fontSize: "24px", fontWeight: "900", margin: "6px 0 0 0", lineHeight: "1.2", textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}>
                   {currentService.title}
                 </h4>
               </div>
@@ -191,3 +186,7 @@ export function Services() {
                 </div>
               </div>
 
+              {/* Footer action row */}
+              <div style={{ marginTop: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #e5e7eb", paddingTop: "16px" }}>
+                <Link 
+                  href={`/services/${currentService.id}`}
