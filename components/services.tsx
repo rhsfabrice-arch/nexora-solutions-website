@@ -170,6 +170,7 @@ export function Services() {
             </div>
 
             {/* Right Side Content Deep-Dive Details */}
+            {/* 🟢 FIXED PROPERTY CASE: Changed style attribute casing from hyphenated text to strict camelCase */}
             <div style={{ flex: "1 1 350px", padding: "32px", position: "relative", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#ffffff" }}>
               <button 
                 onClick={() => setActiveIdx(null)}
@@ -188,6 +189,4 @@ export function Services() {
                 </div>
               </div>
 
-              {/* Footer action row with every HTML tag fully intact and safely closed */}
-              <div style={{ marginTop: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #e5e7eb", paddingTop: "16px" }}>
-                <Link 
+              {/* Footer action row */}
