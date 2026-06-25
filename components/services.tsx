@@ -11,7 +11,7 @@ const servicesList = [
     longDesc: "We provide corporate network configuration, server maintenance, active cloud migration security, and proactive 24/7 technical helpdesk support tailored to keep your business workflows scaling smoothly across East Africa.",
     meta: "Infrastructure · Cloud Support · Systems Engineering",
     gradient: "linear-gradient(135deg, #2563eb, #1e3a8a)",
-    imageUrl: "/images/IT-services.jpeg" // 🔗 Linked to public/images/it-services.jpg
+    imageUrl: "/images/IT-services.jpeg" 
   },
   { 
     id: "consulting", 
@@ -20,7 +20,7 @@ const servicesList = [
     longDesc: "Our advisory experts analyze your current operational workflows, identify production bottlenecks, design automated pipeline sequences, and structure clear technology roadmaps to optimize overhead costs.",
     meta: "Digital Transformation · Overhead Optimization",
     gradient: "linear-gradient(135deg, #059669, #064e3b)",
-    imageUrl: "/images/Business-Consulting.jpeg" // 🔗 Linked to public/images/consulting.jpg
+    imageUrl: "/images/Business-Consulting.jpeg" 
   },
   { 
     id: "quickbooks", 
@@ -29,7 +29,7 @@ const servicesList = [
     longDesc: "Get complete configuration and deployment of point-of-sale systems alongside full cloud QuickBooks ledger integrations, giving management real-time inventory tracking and multi-branch visibility.",
     meta: "Ledger Migration · Auditing Dashboards",
     gradient: "linear-gradient(135deg, #f97316, #78350f)",
-    imageUrl: "/images/QuickBooks-Integration.jpeg" // 🔗 Linked to public/images/quickbooks.jpg
+    imageUrl: "/images/QuickBooks-Integration.jpeg" 
   },
   { 
     id: "pos-systems", 
@@ -38,7 +38,7 @@ const servicesList = [
     longDesc: "Seamless deployment of custom retail transactional terminals paired with automated inventory count scripts, credit merchant pathways, and localized secure hardware arrays.",
     meta: "Multi-branch Logging · Retail Hardware",
     gradient: "linear-gradient(135deg, #7c3aed, #4c1d95)",
-    imageUrl: "/images/POS-Systems.jpeg" // 🔗 Linked to public/images/pos-systems.jpg
+    imageUrl: "/images/POS-Systems.jpeg" 
   },
   { 
     id: "taxation", 
@@ -47,7 +47,7 @@ const servicesList = [
     longDesc: "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
     meta: "Revenue Sync · Compliance Auditing",
     gradient: "linear-gradient(135deg, #dc2626, #4c0519)",
-    imageUrl: "/images/Taxation-Systems.jpg" // 🔗 Linked to public/images/taxation.jpg
+    imageUrl: "/images/Taxation-Systems.jpg" 
   },
   { 
     id: "accounting-technology", 
@@ -56,7 +56,7 @@ const servicesList = [
     longDesc: "Deploy scalable cloud based data analytics dashboards that bridge corporate accounting workflows with live executive financial planning matrices.",
     meta: "Analytics Dashboards · Forecasting Matrices",
     gradient: "linear-gradient(135deg, #0ea5e9, #164e63)",
-    imageUrl: "/images/Accounting-Technology.jpeg" // 🔗 Linked to public/images/accounting-technology.jpg
+    imageUrl: "/images/Accounting-Technology.jpeg" 
   }
 ]
 
@@ -112,7 +112,7 @@ export function Services() {
             style={{ width: "100%", maxWidth: "750px", background: "#ffffff", borderRadius: "24px", overflow: "hidden", border: "1px solid #e5e7eb", display: "flex", flexDirection: "row", flexWrap: "wrap" }}
           >
             
-            {/* Left Graphic/Image Column with light sweep */}
+            {/* Left Image Column View */}
             <div 
               className="glowing-image-area"
               style={{
@@ -124,11 +124,12 @@ export function Services() {
                 justifyContent: "space-between",
                 color: "#ffffff",
                 position: "relative",
-                backgroundImage: `linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent), ${currentService.gradient}`,
+                backgroundImage: `linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent), ${currentService.gradient}`,
                 backgroundBlendMode: "overlay"
               }}
             >
-              {/* 🟢 FIXED CLEAR IMAGE LAYERS FROM YOUR ORIGINAL TEMPLATE */}
+              {/* 🟢 RESOLVED BALANCING: Placed image directly on z-index 2 over the background, 
+                  removed luminosity mode to fix color, and used opacity 0.9 for maximum resolution */}
               {currentService.imageUrl && (
                 <>
                   <img 
@@ -140,29 +141,34 @@ export function Services() {
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
-                      opacity: 0.85, // 🟢 Boosted visibility so it's not washed out
-                      mixBlendMode: "normal", // 🟢 Changed from luminosity to normal for full color
+                      opacity: 0.9, 
+                      mixBlendMode: "normal", 
                       pointerEvents: "none",
-                      zIndex: 1
+                      zIndex: 2
                     }}
                   />
-                  {/* Soft dark vignette to ensure text stays clear over vivid images */}
+                  {/* Soft dark vignette filter running directly over the crisp picture to anchor the white fonts */}
                   <div 
                     style={{
                       position: "absolute",
                       inset: 0,
-                      background: "linear-gradient(to top, rgba(15,23,42,0.85) 40%, rgba(15,23,42,0.3) 100%)",
-                      zIndex: 2,
+                      background: "linear-gradient(to top, rgba(11,31,53,0.9) 35%, rgba(11,31,53,0.2) 100%)",
+                      zIndex: 3,
                       pointerEvents: "none"
                     }}
                   />
                 </>
               )}
 
-              <div style={{ fontSize: "24px", position: "relative", zIndex: 10, textShadow: "0 2px 4px rgba(0,0,0,0.5)" }}>💎</div>
+              {/* Text content placed on z-index 10 to stay safely on top */}
+              <div style={{ fontSize: "24px", position: "relative", zIndex: 10, textShadow: "0 2px 4px rgba(0,0,0,0.4)" }}>💎</div>
               <div style={{ position: "relative", zIndex: 10 }}>
-                <span style={{ fontSize: "10px", fontWeight: "bold", tracking: "wider", opacity: 0.8, textTransform: "uppercase", display: "block", textShadow: "0 1px 3px rgba(0,0,0,0.6)" }}>{currentService.meta}</span>
-                <h4 style={{ fontSize: "24px", fontWeight: "900", margin: "6px 0 0 0", lineHeight: "1.2", textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}>{currentService.title}</h4>
+                <span style={{ fontSize: "10px", fontWeight: "bold", tracking: "wider", opacity: 0.9, textTransform: "uppercase", display: "block", textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>
+                  {currentService.meta}
+                </span>
+                <h4 style={{ fontSize: "24px", fontWeight: "900", margin: "6px 0 0 0", lineHeight: "1.2", textShadow: "0 2px 6px rgba(0,0,0,0.6)" }}>
+                  {currentService.title}
+                </h4>
               </div>
             </div>
 
@@ -181,3 +187,7 @@ export function Services() {
                 <p style={{ color: "#6b7280", fontSize: "14px", lineHeight: "1.5" }}>{currentService.desc}</p>
                 
                 <div style={{ marginTop: "16px", padding: "14px", background: "#f3f4f6", border: "1px dashed #e5e7eb", borderRadius: "12px" }}>
+                  <p style={{ color: "#0b1f35", fontSize: "13px", lineHeight: "1.5", margin: 0 }}>{currentService.longDesc}</p>
+                </div>
+              </div>
+
