@@ -10,7 +10,7 @@ const servicesList = [
     desc: "Managed IT support and cloud infrastructure blueprints.",
     longDesc: "We provide corporate network configuration, server maintenance, active cloud migration security, and proactive 24/7 technical helpdesk support tailored to keep your business workflows scaling smoothly across East Africa.",
     meta: "Infrastructure · Cloud Support · Systems Engineering",
-    gradient: "linear-gradient(135deg, #2563eb, #1e3a8a)",
+    gradient: "linear-gradient(135deg, #1e3a8a, #0f172a)", // Slightly darkened for text contrast
     imageUrl: "/images/IT-services.jpeg" 
   },
   { 
@@ -19,7 +19,7 @@ const servicesList = [
     desc: "Strategic advisory and workflow transformation roadmaps.",
     longDesc: "Our advisory experts analyze your current operational workflows, identify production bottlenecks, design automated pipeline sequences, and structure clear technology roadmaps to optimize overhead costs.",
     meta: "Digital Transformation · Overhead Optimization",
-    gradient: "linear-gradient(135deg, #059669, #064e3b)",
+    gradient: "linear-gradient(135deg, #064e3b, #022c22)", // Slightly darkened for text contrast
     imageUrl: "/images/Business-Consulting.jpeg" 
   },
   { 
@@ -28,7 +28,7 @@ const servicesList = [
     desc: "Certified setup, file migrations, and custom dashboards.",
     longDesc: "Get complete configuration and deployment of point-of-sale systems alongside full cloud QuickBooks ledger integrations, giving management real-time inventory tracking and multi-branch visibility.",
     meta: "Ledger Migration · Auditing Dashboards",
-    gradient: "linear-gradient(135deg, #f97316, #78350f)",
+    gradient: "linear-gradient(135deg, #78350f, #451a03)", // Slightly darkened for text contrast
     imageUrl: "/images/QuickBooks-Integration.jpeg" 
   },
   { 
@@ -37,7 +37,7 @@ const servicesList = [
     desc: "Cloud retail transactional terminals and inventory tracking.",
     longDesc: "Seamless deployment of custom retail transactional terminals paired with automated inventory count scripts, credit merchant pathways, and localized secure hardware arrays.",
     meta: "Multi-branch Logging · Retail Hardware",
-    gradient: "linear-gradient(135deg, #7c3aed, #4c1d95)",
+    gradient: "linear-gradient(135deg, #4c1d95, #2e1065)", // Slightly darkened for text contrast
     imageUrl: "/images/POS-Systems.jpeg" 
   },
   { 
@@ -46,7 +46,7 @@ const servicesList = [
     desc: "Automated regional compliance and automated filing structures.",
     longDesc: "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
     meta: "Revenue Sync · Compliance Auditing",
-    gradient: "linear-gradient(135deg, #dc2626, #4c0519)",
+    gradient: "linear-gradient(135deg, #4c0519, #881337)", // Slightly darkened for text contrast
     imageUrl: "/images/Taxation-Systems.jpg" 
   },
   { 
@@ -55,7 +55,7 @@ const servicesList = [
     desc: "Modern reporting frameworks and cloud ledger integrations.",
     longDesc: "Deploy scalable cloud based data analytics dashboards that bridge corporate accounting workflows with live executive financial planning matrices.",
     meta: "Analytics Dashboards · Forecasting Matrices",
-    gradient: "linear-gradient(135deg, #0ea5e9, #164e63)",
+    gradient: "linear-gradient(135deg, #164e63, #083344)", // Slightly darkened for text contrast
     imageUrl: "/images/Accounting-Technology.jpeg" 
   }
 ]
@@ -124,32 +124,48 @@ export function Services() {
                 justifyContent: "space-between",
                 color: "#ffffff",
                 position: "relative",
-                backgroundImage: `linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent), ${currentService.gradient}`,
+                backgroundImage: `linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent), ${currentService.gradient}`,
                 backgroundBlendMode: "overlay"
               }}
             >
-              {/* Image layer wrapped with safety rendering paths */}
+              {/* 🟢 FIXED CLEAR IMAGE LAYER: Increased opacity, natural color blending, and protective overlay text-shadows */}
               {currentService.imageUrl && (
-                <img 
-                  src={currentService.imageUrl} 
-                  alt={currentService.title}
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    opacity: 0.22,
-                    mixBlendMode: "luminosity",
-                    pointerEvents: "none"
-                  }}
-                />
+                <>
+                  <img 
+                    src={currentService.imageUrl} 
+                    alt={currentService.title}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      opacity: 0.85, // 🟢 Boosted visibility so the picture is clear
+                      pointerEvents: "none",
+                      zIndex: 1
+                    }}
+                  />
+                  {/* Soft dark vignette to ensure the text on top is perfectly readable */}
+                  <div 
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(to top, rgba(15,23,42,0.85) 40%, rgba(15,23,42,0.3) 100%)",
+                      zIndex: 2,
+                      pointerEvents: "none"
+                    }}
+                  />
+                </>
               )}
 
-              <div style={{ fontSize: "24px", position: "relative", zIndex: 10 }}>💎</div>
+              <div style={{ fontSize: "24px", position: "relative", zIndex: 10, textShadow: "0 2px 4px rgba(0,0,0,0.5)" }}>💎</div>
               <div style={{ position: "relative", zIndex: 10 }}>
-                <span style={{ fontSize: "10px", fontWeight: "bold", tracking: "wider", opacity: 0.8, textTransform: "uppercase", display: "block" }}>{currentService.meta}</span>
-                <h4 style={{ fontSize: "24px", fontWeight: "900", margin: "6px 0 0 0", lineHeight: "1.2" }}>{currentService.title}</h4>
+                <span style={{ fontSize: "10px", fontWeight: "bold", tracking: "wider", opacity: 0.9, textTransform: "uppercase", display: "block", textShadow: "0 1px 3px rgba(0,0,0,0.6)" }}>
+                  {currentService.meta}
+                </span>
+                <h4 style={{ fontSize: "24px", fontWeight: "900", margin: "6px 0 0 0", lineHeight: "1.2", textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}>
+                  {currentService.title}
+                </h4>
               </div>
             </div>
 
@@ -170,28 +186,3 @@ export function Services() {
                 <div style={{ marginTop: "16px", padding: "14px", background: "#f3f4f6", border: "1px dashed #e5e7eb", borderRadius: "12px" }}>
                   <p style={{ color: "#0b1f35", fontSize: "13px", lineHeight: "1.5", margin: 0 }}>{currentService.longDesc}</p>
                 </div>
-              </div>
-
-              {/* Footer action row */}
-              <div style={{ marginTop: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #e5e7eb", paddingTop: "16px" }}>
-                <Link 
-                  href={`/services/${currentService.id}`}
-                  style={{ fontSize: "13px", fontWeight: "bold", color: "#10b981", textDecoration: "none" }}
-                >
-                  View full landing page ↗
-                </Link>
-                <button 
-                  onClick={() => setActiveIdx(null)}
-                  style={{ padding: "10px 20px", background: "#0b1f35", color: "#ffffff", border: "none", borderRadius: "10px", fontSize: "12px", fontWeight: "bold", cursor: "pointer" }}
-                >
-                  Close
-                </button>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      )}
-    </section>
-  )
-}
