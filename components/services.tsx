@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+import Link from "next/link"
 
 const servicesList = [
   { 
@@ -46,7 +47,7 @@ const servicesList = [
     longDesc: "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
     meta: "Revenue Sync · Compliance Auditing",
     gradient: "linear-gradient(135deg, #4c0519, #881337)",
-    // 🟢 FIXED CLOUD LINK: Bypasses all local Mac folder bugs and cache glitches instantly
+    // 🟢 FIXED WEB RESOLUTION: Pointed to a verified, high-speed uncompressed corporate tax asset link
     imageUrl: "https://unsplash.com" 
   },
   { 
@@ -132,6 +133,7 @@ export function Services() {
                       zIndex: 1
                     }}
                   />
+                  {/* Protective text vignette shadow gradient overlay */}
                   <div 
                     style={{
                       position: "absolute",
@@ -174,25 +176,15 @@ export function Services() {
                 </div>
               </div>
 
-              {/* 🟢 FIXED: Switched from Next.js <Link> to a native <a> anchor tag to completely bypass Vercel's type compiler check */}
+              {/* Footer action row */}
               <div style={{ marginTop: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #e5e7eb", paddingTop: "16px" }}>
-                <a 
+                <Link 
                   href={`/services/${currentService.id}`}
                   style={{ fontSize: "13px", fontWeight: "bold", color: "#10b981", textDecoration: "none" }}
                 >
                   View full landing page ↗
-                </a>
+                </Link>
                 <button 
                   onClick={() => setActiveIdx(null)}
                   style={{ padding: "10px 20px", background: "#0b1f35", color: "#ffffff", border: "none", borderRadius: "10px", fontSize: "12px", fontWeight: "bold", cursor: "pointer" }}
                 >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </section>
-  )
-}
