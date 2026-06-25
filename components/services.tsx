@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+import Link from "next/link"
 
 const servicesList = [
   { 
@@ -127,7 +128,7 @@ export function Services() {
                 backgroundBlendMode: "overlay"
               }}
             >
-              {/* FIXED SHARP IMAGE LAYER */}
+              {/* FIXED IMAGE OVERLAY VIEW - CRISP COLORS & REDUCED GLARE */}
               {currentService.imageUrl && (
                 <>
                   <img 
@@ -144,11 +145,12 @@ export function Services() {
                       zIndex: 1
                     }}
                   />
+                  {/* Subtle drop shadow gradient layer to safeguard readability */}
                   <div 
                     style={{
                       position: "absolute",
                       inset: 0,
-                      background: "linear-gradient(to top, rgba(15,23,42,0.85) 40%, rgba(15,23,42,0.3) 100%)",
+                      background: "linear-gradient(to top, rgba(15,23,42,0.85) 45%, rgba(15,23,42,0.25) 100%)",
                       zIndex: 2,
                       pointerEvents: "none"
                     }}
@@ -186,7 +188,6 @@ export function Services() {
                 </div>
               </div>
 
-              {/* 🟢 FIXED NATIVE ANCHOR: Uses a standard standard web link to avoid TypeScript Next/Link compilation locks */}
+              {/* Footer action row with every HTML tag fully intact and safely closed */}
               <div style={{ marginTop: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #e5e7eb", paddingTop: "16px" }}>
-                <a 
-                  href={`/services/${currentService.id}`}
+                <Link 
