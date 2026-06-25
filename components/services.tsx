@@ -41,8 +41,9 @@ const servicesList = [
     desc: "Automated regional compliance and automated filing structures.",
     longDesc: "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
     meta: "Revenue Sync · Compliance Auditing",
-    // 🟢 SECURE FALLBACK PATH: Using a direct high-speed uncompressed hosted cloud asset link
-    imageUrl: "https://unsplash.com" 
+    // 🔗 LINK: Change this path text inside the quotes to match your filename EXACTLY
+    imageUrl: "/images/Taxation-Systems.jpg" 
+  },
   },
   { 
     id: "accounting-technology", 
