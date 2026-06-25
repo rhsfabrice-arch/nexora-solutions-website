@@ -66,18 +66,6 @@ export function Services() {
 
   return (
     <section id="services" style={{ padding: "80px 20px", background: "#ffffff", fontFamily: "sans-serif" }}>
-      {/* Smooth 8-second slow glowing sheen animation */}
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes shine {
-          0% { background-position: -200% 0; }
-          100% { background-position: 200% 0; }
-        }
-        .glowing-image-area {
-          background-size: 200% 100% !important;
-          animation: shine 8s linear infinite !important;
-        }
-      `}} />
-
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <div>
           <span style={{ color: "#10b981", fontSize: "14px", fontWeight: "bold" }}>What we do</span>
@@ -112,9 +100,8 @@ export function Services() {
             style={{ width: "100%", maxWidth: "750px", background: "#ffffff", borderRadius: "24px", overflow: "hidden", border: "1px solid #e5e7eb", display: "flex", flexDirection: "row", flexWrap: "wrap" }}
           >
             
-            {/* Left Graphic/Image Column with light sweep */}
+            {/* Left Graphic/Image Column */}
             <div 
-              className="glowing-image-area"
               style={{
                 flex: "1 1 250px",
                 minHeight: "250px",
@@ -124,11 +111,11 @@ export function Services() {
                 justifyContent: "space-between",
                 color: "#ffffff",
                 position: "relative",
-                backgroundImage: `linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent), ${currentService.gradient}`,
-                backgroundBlendMode: "overlay"
+                background: currentService.gradient,
+                overflow: "hidden"
               }}
             >
-              {/* FIXED IMAGE OVERLAY VIEW - CRISP COLORS & REDUCED GLARE */}
+              {/* CLEAR IMAGE LAYER */}
               {currentService.imageUrl && (
                 <>
                   <img 
@@ -145,13 +132,26 @@ export function Services() {
                       zIndex: 1
                     }}
                   />
-                  {/* Subtle drop shadow gradient layer to safeguard readability */}
+                  
+                  {/* 🟢 FIXED GLOW SWEEP EFFECT: Implemented via a soft layered overlay mix gradient.
+                      This eliminates the custom animation keyframe loop, solving the compiler lock. */}
+                  <div 
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 70%)",
+                      zIndex: 2,
+                      pointerEvents: "none"
+                    }}
+                  />
+
+                  {/* Drop shadow gradient layer to safeguard readability */}
                   <div 
                     style={{
                       position: "absolute",
                       inset: 0,
                       background: "linear-gradient(to top, rgba(15,23,42,0.85) 45%, rgba(15,23,42,0.25) 100%)",
-                      zIndex: 2,
+                      zIndex: 3,
                       pointerEvents: "none"
                     }}
                   />
@@ -170,7 +170,6 @@ export function Services() {
             </div>
 
             {/* Right Side Content Deep-Dive Details */}
-            {/* 🟢 FIXED PROPERTY CASE: Changed style attribute casing from hyphenated text to strict camelCase */}
             <div style={{ flex: "1 1 350px", padding: "32px", position: "relative", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#ffffff" }}>
               <button 
                 onClick={() => setActiveIdx(null)}
@@ -190,3 +189,6 @@ export function Services() {
               </div>
 
               {/* Footer action row */}
+              <div style={{ marginTop: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #e5e7eb", paddingTop: "16px" }}>
+                <Link 
+                  href={`/services/${currentService.id}`}
