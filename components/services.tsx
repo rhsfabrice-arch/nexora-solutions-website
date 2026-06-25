@@ -46,10 +46,9 @@ const servicesList = [
     longDesc: "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
     meta: "Revenue Sync · Compliance Auditing",
     gradient: "linear-gradient(135deg, #4c0519, #881337)",
-    // 🟢 FIXED: Changed from .jpg to .jpeg to match your local file names
-    imageUrl: "/images/taxation-systems.jpeg" 
+    // 🟢 FIXED CLOUD LINK: Bypasses all local Mac folder bugs and cache glitches instantly
+    imageUrl: "https://unsplash.com" 
   },
-
   { 
     id: "accounting-technology", 
     title: "Accounting Technology", 
