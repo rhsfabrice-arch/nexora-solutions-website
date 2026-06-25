@@ -10,7 +10,8 @@ const servicesList = [
     desc: "Managed IT support and cloud infrastructure blueprints.",
     longDesc: "We provide corporate network configuration, server maintenance, active cloud migration security, and proactive 24/7 technical helpdesk support tailored to keep your business workflows scaling smoothly across East Africa.",
     meta: "Infrastructure · Cloud Support · Systems Engineering",
-    gradient: "linear-gradient(135deg, #2563eb, #1e3a8a)" 
+    gradient: "linear-gradient(135deg, #2563eb, #1e3a8a)",
+    imageUrl: "/images/IT services.jpeg" // 🔗 Linked to public/images/it-services.jpg
   },
   { 
     id: "consulting", 
@@ -18,7 +19,8 @@ const servicesList = [
     desc: "Strategic advisory and workflow transformation roadmaps.",
     longDesc: "Our advisory experts analyze your current operational workflows, identify production bottlenecks, design automated pipeline sequences, and structure clear technology roadmaps to optimize overhead costs.",
     meta: "Digital Transformation · Overhead Optimization",
-    gradient: "linear-gradient(135deg, #059669, #064e3b)" 
+    gradient: "linear-gradient(135deg, #059669, #064e3b)",
+    imageUrl: "/images/Business Consulting.jpeg" // 🔗 Linked to public/images/consulting.jpg
   },
   { 
     id: "quickbooks", 
@@ -26,7 +28,8 @@ const servicesList = [
     desc: "Certified setup, file migrations, and custom dashboards.",
     longDesc: "Get complete configuration and deployment of point-of-sale systems alongside full cloud QuickBooks ledger integrations, giving management real-time inventory tracking and multi-branch visibility.",
     meta: "Ledger Migration · Auditing Dashboards",
-    gradient: "linear-gradient(135deg, #f97316, #78350f)" 
+    gradient: "linear-gradient(135deg, #f97316, #78350f)",
+    imageUrl: "/images/QuickBooks Integration.jpeg" // 🔗 Linked to public/images/quickbooks.jpg
   },
   { 
     id: "pos-systems", 
@@ -34,7 +37,8 @@ const servicesList = [
     desc: "Cloud retail transactional terminals and inventory tracking.",
     longDesc: "Seamless deployment of custom retail transactional terminals paired with automated inventory count scripts, credit merchant pathways, and localized secure hardware arrays.",
     meta: "Multi-branch Logging · Retail Hardware",
-    gradient: "linear-gradient(135deg, #7c3aed, #4c1d95)" 
+    gradient: "linear-gradient(135deg, #7c3aed, #4c1d95)",
+    imageUrl: "/images/POS Systems.jpeg" // 🔗 Linked to public/images/pos-systems.jpg
   },
   { 
     id: "taxation", 
@@ -42,7 +46,8 @@ const servicesList = [
     desc: "Automated regional compliance and automated filing structures.",
     longDesc: "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
     meta: "Revenue Sync · Compliance Auditing",
-    gradient: "linear-gradient(135deg, #dc2626, #4c0519)" 
+    gradient: "linear-gradient(135deg, #dc2626, #4c0519)",
+    imageUrl: "/images/Taxation Systems.jpg" // 🔗 Linked to public/images/taxation.jpg
   },
   { 
     id: "accounting-technology", 
@@ -50,7 +55,8 @@ const servicesList = [
     desc: "Modern reporting frameworks and cloud ledger integrations.",
     longDesc: "Deploy scalable cloud based data analytics dashboards that bridge corporate accounting workflows with live executive financial planning matrices.",
     meta: "Analytics Dashboards · Forecasting Matrices",
-    gradient: "linear-gradient(135deg, #0ea5e9, #164e63)" 
+    gradient: "linear-gradient(135deg, #0ea5e9, #164e63)",
+    imageUrl: "/images/Accounting Technology.jpeg" // 🔗 Linked to public/images/accounting-technology.jpg
   }
 ]
 
@@ -60,7 +66,7 @@ export function Services() {
 
   return (
     <section id="services" style={{ padding: "80px 20px", background: "#ffffff", fontFamily: "sans-serif" }}>
-      {/* 🟢 SAFELY INJECTED GLOW ANIMATION: Seamless linear position sliding sheen */}
+      {/* Smooth 8-second slow glowing sheen animation */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes shine {
           0% { background-position: -200% 0; }
@@ -68,17 +74,18 @@ export function Services() {
         }
         .glowing-image-area {
           background-size: 200% 100% !important;
-          animation: shine 4s linear infinite !important;
+          animation: shine 8s linear infinite !important;
         }
       `}} />
 
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <div>
-          <span style={{ color: "#10b981", fontSize: "14px", fontWeight: "bold", uppercase: "true" }}>What we do</span>
+          <span style={{ color: "#10b981", fontSize: "14px", fontWeight: "bold" }}>What we do</span>
           <h2 style={{ color: "#0b1f35", fontSize: "32px", fontWeight: "800", marginTop: "10px" }}>Complete business technology, under one roof</h2>
           <p style={{ color: "#6b7280", marginTop: "12px" }}>Click any card below to open interactive operational parameters.</p>
         </div>
 
+        {/* Main Grid View */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px", marginTop: "40px" }}>
           {servicesList.map((s, idx) => (
             <div
@@ -94,23 +101,23 @@ export function Services() {
         </div>
       </div>
 
+      {/* Interactive Light-Glow Popup Window */}
       {currentService && (
         <div 
           onClick={() => setActiveIdx(null)}
           style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", padding: "20px", background: "rgba(11,31,53,0.6)", backdropFilter: "blur(4px)" }}
         >
-          {/* Split Window Modal Box Layout */}
           <div 
             onClick={(e) => e.stopPropagation()}
-            style={{ width: "100%", maxWidth: "750px", background: "#ffffff", borderRadius: "24px", overflow: "hidden", border: "1px solid #e5e7eb", display: "flex", flexDirection: "row", flexWrap: "wrap", boxTriangle: "none" }}
+            style={{ width: "100%", maxWidth: "750px", background: "#ffffff", borderRadius: "24px", overflow: "hidden", border: "1px solid #e5e7eb", display: "flex", flexDirection: "row", flexWrap: "wrap" }}
           >
             
-            {/* 🟢 LEFT HAND ARTWORK VIEW: Combined background styles to generate a moving white light laser beam split */}
+            {/* Left Graphic/Image Column with light sweep */}
             <div 
               className="glowing-image-area"
               style={{
                 flex: "1 1 250px",
-                minHeight: "220px",
+                minHeight: "250px",
                 padding: "32px",
                 display: "flex",
                 flexDirection: "column",
@@ -121,15 +128,33 @@ export function Services() {
                 backgroundBlendMode: "overlay"
               }}
             >
-              <div style={{ fontSize: "24px" }}>💎</div>
-              <div>
+              {/* Image layer wrapped with safety rendering paths */}
+              {currentService.imageUrl && (
+                <img 
+                  src={currentService.imageUrl} 
+                  alt={currentService.title}
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    opacity: 0.22,
+                    mixBlendMode: "luminosity",
+                    pointerEvents: "none"
+                  }}
+                />
+              )}
+
+              <div style={{ fontSize: "24px", position: "relative", zIndex: 10 }}>💎</div>
+              <div style={{ position: "relative", zIndex: 10 }}>
                 <span style={{ fontSize: "10px", fontWeight: "bold", tracking: "wider", opacity: 0.8, textTransform: "uppercase", display: "block" }}>{currentService.meta}</span>
                 <h4 style={{ fontSize: "24px", fontWeight: "900", margin: "6px 0 0 0", lineHeight: "1.2" }}>{currentService.title}</h4>
               </div>
             </div>
 
-            {/* RIGHT HAND CONTENT DEEP DIVE */}
-            <div style={{ flex: "1 1 350px", padding: "32px", position: "relative", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            {/* Right Side Content Deep-Dive Details */}
+            <div style={{ flex: "1 1 350px", padding: "32px", position: "relative", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#ffffff" }}>
               <button 
                 onClick={() => setActiveIdx(null)}
                 style={{ position: "absolute", top: "20px", right: "20px", background: "none", border: "none", fontSize: "20px", cursor: "pointer", color: "#6b7280" }}
@@ -147,6 +172,7 @@ export function Services() {
                 </div>
               </div>
 
+              {/* Footer action row */}
               <div style={{ marginTop: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #e5e7eb", paddingTop: "16px" }}>
                 <Link 
                   href={`/services/${currentService.id}`}
@@ -156,17 +182,3 @@ export function Services() {
                 </Link>
                 <button 
                   onClick={() => setActiveIdx(null)}
-                  style={{ padding: "10px 20px", background: "#0b1f35", color: "#ffffff", border: "none", borderRadius: "10px", fontSize: "12px", fontWeight: "bold", cursor: "pointer" }}
-                >
-                  Close
-                </button>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      )}
-    </section>
-  )
-}
