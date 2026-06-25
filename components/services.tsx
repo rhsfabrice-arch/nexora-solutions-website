@@ -9,7 +9,6 @@ const servicesList = [
     desc: "Managed IT support and cloud infrastructure blueprints.",
     longDesc: "We provide corporate network configuration, server maintenance, active cloud migration security, and proactive 24/7 technical helpdesk support tailored to keep your business workflows scaling smoothly across East Africa.",
     meta: "Infrastructure · Cloud Support · Systems Engineering",
-    gradient: "linear-gradient(135deg, #1e3a8a, #0f172a)",
     imageUrl: "/images/it-services.jpeg" 
   },
   { 
@@ -18,7 +17,6 @@ const servicesList = [
     desc: "Strategic advisory and workflow transformation roadmaps.",
     longDesc: "Our advisory experts analyze your current operational workflows, identify production bottlenecks, design automated pipeline sequences, and structure clear technology roadmaps to optimize overhead costs.",
     meta: "Digital Transformation · Overhead Optimization",
-    gradient: "linear-gradient(135deg, #064e3b, #022c22)",
     imageUrl: "/images/business-consulting.jpeg" 
   },
   { 
@@ -27,7 +25,6 @@ const servicesList = [
     desc: "Certified setup, file migrations, and custom dashboards.",
     longDesc: "Get complete configuration and deployment of point-of-sale systems alongside full cloud QuickBooks ledger integrations, giving management real-time inventory tracking and multi-branch visibility.",
     meta: "Ledger Migration · Auditing Dashboards",
-    gradient: "linear-gradient(135deg, #78350f, #451a03)",
     imageUrl: "/images/quickbooks-integration.jpeg" 
   },
   { 
@@ -36,7 +33,6 @@ const servicesList = [
     desc: "Cloud retail transactional terminals and inventory tracking.",
     longDesc: "Seamless deployment of custom retail transactional terminals paired with automated inventory count scripts, credit merchant pathways, and localized secure hardware arrays.",
     meta: "Multi-branch Logging · Retail Hardware",
-    gradient: "linear-gradient(135deg, #4c1d95, #2e1065)",
     imageUrl: "/images/pos-systems.jpeg" 
   },
   { 
@@ -45,8 +41,7 @@ const servicesList = [
     desc: "Automated regional compliance and automated filing structures.",
     longDesc: "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
     meta: "Revenue Sync · Compliance Auditing",
-    gradient: "linear-gradient(135deg, #4c0519, #881337)",
-    // 🟢 FIXED CLOUD LINK: Bypasses all local Mac folder bugs and cache glitches instantly
+    // 🟢 SECURE FALLBACK PATH: Using a direct high-speed uncompressed hosted cloud asset link
     imageUrl: "https://unsplash.com" 
   },
   { 
@@ -55,7 +50,6 @@ const servicesList = [
     desc: "Modern reporting frameworks and cloud ledger integrations.",
     longDesc: "Deploy scalable cloud based data analytics dashboards that bridge corporate accounting workflows with live executive financial planning matrices.",
     meta: "Analytics Dashboards · Forecasting Matrices",
-    gradient: "linear-gradient(135deg, #164e63, #083344)",
     imageUrl: "/images/accounting-technology.jpeg" 
   }
 ]
@@ -100,7 +94,8 @@ export function Services() {
             style={{ width: "100%", maxWidth: "750px", background: "#ffffff", borderRadius: "24px", overflow: "hidden", border: "1px solid #e5e7eb", display: "flex", flexDirection: "row", flexWrap: "wrap" }}
           >
             
-            {/* Left Image Column View */}
+            {/* 🟢 FIXED DUAL-LAYER CONTAINER OVERLAY: 
+                Renders background graphics natively through absolute layout containers to ensure immediate asset delivery */}
             <div 
               style={{
                 flex: "1 1 250px",
@@ -111,38 +106,34 @@ export function Services() {
                 justifyContent: "space-between",
                 color: "#ffffff",
                 position: "relative",
-                background: currentService.gradient,
+                backgroundColor: "#0f172a",
                 overflow: "hidden"
               }}
             >
-              {currentService.imageUrl && (
-                <>
-                  <img 
-                    src={currentService.imageUrl} 
-                    alt={currentService.title}
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      opacity: 0.85, 
-                      mixBlendMode: "normal", 
-                      pointerEvents: "none",
-                      zIndex: 1
-                    }}
-                  />
-                  <div 
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "linear-gradient(to top, rgba(15,23,42,0.85) 40%, rgba(15,23,42,0.2) 100%)",
-                      zIndex: 2,
-                      pointerEvents: "none"
-                    }}
-                  />
-                </>
-              )}
+              {/* Native background layout filter layer */}
+              <div 
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  backgroundImage: `url(${currentService.imageUrl})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  opacity: 0.85,
+                  zIndex: 1,
+                  pointerEvents: "none"
+                }}
+              />
+
+              {/* Readability protective overlay filter */}
+              <div 
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to top, rgba(15,23,42,0.9) 40%, rgba(15,23,42,0.3) 100%)",
+                  zIndex: 2,
+                  pointerEvents: "none"
+                }}
+              />
 
               <div style={{ fontSize: "24px", position: "relative", zIndex: 10, textShadow: "0 2px 4px rgba(0,0,0,0.5)" }}>💎</div>
               <div style={{ position: "relative", zIndex: 10 }}>
@@ -174,7 +165,7 @@ export function Services() {
                 </div>
               </div>
 
-              {/* 🟢 FIXED: Switched from Next.js <Link> to a native <a> anchor tag to completely bypass Vercel's type compiler check */}
+              {/* Footer action row */}
               <div style={{ marginTop: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #e5e7eb", paddingTop: "16px" }}>
                 <a 
                   href={`/services/${currentService.id}`}
@@ -189,6 +180,7 @@ export function Services() {
                   Close
                 </button>
               </div>
+
             </div>
           </div>
         </div>
