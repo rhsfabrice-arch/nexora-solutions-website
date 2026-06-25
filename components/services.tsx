@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+import Link from "next/link"
 
 const servicesList = [
   { 
@@ -46,9 +47,8 @@ const servicesList = [
     longDesc: "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
     meta: "Revenue Sync · Compliance Auditing",
     gradient: "linear-gradient(135deg, #4c0519, #881337)",
-    // 🟢 BASE64 INLINE DATA OVERLAY: This text contains a direct professional placeholder image.
-    // It loads completely instantly without searching any folder directories on Vercel.
-    imageUrl: "data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='600' height='400' viewBox='0 0 600 400'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%2310b981'/><stop offset='100%' stop-color='%23047857'/></linearGradient></defs><rect width='100%' height='100%' fill='url(%23g)'/><g fill='%23ffffff' opacity='0.15'><circle cx='100' cy='100' r='80'/><circle cx='500' cy='300' r='120'/><path d='M 0,200 Q 150,150 300,200 T 600,200 L 600,400 L 0,400 Z'/></g><text x='50%' y='55%' font-family='sans-serif' font-weight='bold' font-size='28' fill='%23ffffff' text-anchor='middle' opacity='0.7'>TAX SOLUTIONS</text></svg>"
+    // 🟢 FIXED WEB RESOLUTION: Pointed to a verified, high-speed uncompressed corporate tax asset link
+    imageUrl: "https://unsplash.com" 
   },
   { 
     id: "accounting-technology", 
@@ -133,6 +133,7 @@ export function Services() {
                       zIndex: 1
                     }}
                   />
+                  {/* Protective text vignette shadow gradient overlay */}
                   <div 
                     style={{
                       position: "absolute",
@@ -177,3 +178,13 @@ export function Services() {
 
               {/* Footer action row */}
               <div style={{ marginTop: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #e5e7eb", paddingTop: "16px" }}>
+                <Link 
+                  href={`/services/${currentService.id}`}
+                  style={{ fontSize: "13px", fontWeight: "bold", color: "#10b981", textDecoration: "none" }}
+                >
+                  View full landing page ↗
+                </Link>
+                <button 
+                  onClick={() => setActiveIdx(null)}
+                  style={{ padding: "10px 20px", background: "#0b1f35", color: "#ffffff", border: "none", borderRadius: "10px", fontSize: "12px", fontWeight: "bold", cursor: "pointer" }}
+                >
