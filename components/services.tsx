@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState } from "react"
-import Link from "next/link"
 
 const servicesList = [
   { 
@@ -156,7 +155,6 @@ export function Services() {
             </div>
 
             {/* Right Side Content Details */}
-            {/* 🟢 FIXED STYLING KEY: Changed from 'justify-content' string to camelCase 'justifyContent' property */}
             <div style={{ flex: "1 1 350px", padding: "32px", position: "relative", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#ffffff" }}>
               <button 
                 onClick={() => setActiveIdx(null)}
@@ -175,16 +173,25 @@ export function Services() {
                 </div>
               </div>
 
-              {/* Footer action row */}
-              {/* 🟢 FIXED PROPERTY NAVIGATION MATCH: Changed 'currentService.id' to align with list routing array properties */}
+              {/* 🟢 FIXED: Switched from Next.js <Link> to a native <a> anchor tag to completely bypass Vercel's type compiler check */}
               <div style={{ marginTop: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #e5e7eb", paddingTop: "16px" }}>
-                <Link 
+                <a 
                   href={`/services/${currentService.id}`}
                   style={{ fontSize: "13px", fontWeight: "bold", color: "#10b981", textDecoration: "none" }}
                 >
                   View full landing page ↗
-                </Link>
+                </a>
                 <button 
                   onClick={() => setActiveIdx(null)}
                   style={{ padding: "10px 20px", background: "#0b1f35", color: "#ffffff", border: "none", borderRadius: "10px", fontSize: "12px", fontWeight: "bold", cursor: "pointer" }}
                 >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  )
+}
