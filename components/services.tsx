@@ -115,7 +115,7 @@ export function Services() {
                 overflow: "hidden"
               }}
             >
-              {/* 🟢 RESOLVED: Images placed at full clarity with a balanced overlay highlight beam */}
+              {/* Images placed at full clarity without any custom style elements */}
               {currentService.imageUrl && (
                 <>
                   <img 
@@ -133,23 +133,13 @@ export function Services() {
                       zIndex: 1
                     }}
                   />
-                  {/* Soft light sweep overlay running directly in front of the color images */}
-                  <div 
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "linear-gradient(115deg, rgba(255,255,255,0) 20%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 80%)",
-                      zIndex: 2,
-                      pointerEvents: "none"
-                    }}
-                  />
-                  {/* Protective text vignette shadow gradient */}
+                  {/* Protective dark text vignette shadow gradient */}
                   <div 
                     style={{
                       position: "absolute",
                       inset: 0,
                       background: "linear-gradient(to top, rgba(15,23,42,0.85) 40%, rgba(15,23,42,0.2) 100%)",
-                      zIndex: 3,
+                      zIndex: 2,
                       pointerEvents: "none"
                     }}
                   />
@@ -190,3 +180,14 @@ export function Services() {
               <div style={{ marginTop: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #e5e7eb", paddingTop: "16px" }}>
                 <Link 
                   href={`/services/${currentService.id}`}
+                  style={{ fontSize: "13px", fontWeight: "bold", color: "#10b981", textDecoration: "none" }}
+                >
+                  View full landing page ↗
+                </Link>
+                <button 
+                  onClick={() => setActiveIdx(null)}
+                  style={{ padding: "10px 20px", background: "#0b1f35", color: "#ffffff", border: "none", borderRadius: "10px", fontSize: "12px", fontWeight: "bold", cursor: "pointer" }}
+                >
+                  Close
+                </button>
+              </div>
