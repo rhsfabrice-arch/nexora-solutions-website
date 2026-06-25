@@ -39,15 +39,15 @@ const servicesList = [
     gradient: "linear-gradient(135deg, #4c1d95, #2e1065)",
     imageUrl: "/images/pos-systems.jpeg" 
   },
-  { 
+    { 
     id: "taxation", 
     title: "Taxation Systems", 
     desc: "Automated regional compliance and automated filing structures.",
     longDesc: "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
     meta: "Revenue Sync · Compliance Auditing",
     gradient: "linear-gradient(135deg, #4c0519, #881337)",
-    // 🟢 SECURE CLOUD LINK: Fixed path pointing to a live high-resolution, uncompressed tax compliance image asset
-    imageUrl: "https://unsplash.com" 
+    // 🟢 FIXED: Linked directly to your specific local file name in lowercase
+    imageUrl: "/images/tax-servicese.jpeg" 
   },
   { 
     id: "accounting-technology", 
