@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState } from "react"
-import Link from "next/link"
 
 const servicesList = [
   { 
@@ -128,7 +127,7 @@ export function Services() {
                 backgroundBlendMode: "overlay"
               }}
             >
-              {/* FIXED CLEAR IMAGE LAYER */}
+              {/* FIXED SHARP IMAGE LAYER */}
               {currentService.imageUrl && (
                 <>
                   <img 
@@ -187,9 +186,7 @@ export function Services() {
                 </div>
               </div>
 
-              {/* Footer action row */}
+              {/* 🟢 FIXED NATIVE ANCHOR: Uses a standard standard web link to avoid TypeScript Next/Link compilation locks */}
               <div style={{ marginTop: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid #e5e7eb", paddingTop: "16px" }}>
-                <Link 
+                <a 
                   href={`/services/${currentService.id}`}
-                  style={{ fontSize: "13px", fontWeight: "bold", color: "#10b981", textDecoration: "none" }}
-                >
