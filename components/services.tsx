@@ -11,7 +11,7 @@ const servicesList = [
     longDesc: "We provide corporate network configuration, server maintenance, active cloud migration security, and proactive 24/7 technical helpdesk support tailored to keep your business workflows scaling smoothly across East Africa.",
     meta: "Infrastructure · Cloud Support · Systems Engineering",
     gradient: "linear-gradient(135deg, #2563eb, #1e3a8a)",
-    imageUrl: "/images/IT services.jpeg" // 🔗 Linked to public/images/it-services.jpg
+    imageUrl: "/images/IT-services.jpeg" // 🔗 Linked to public/images/it-services.jpg
   },
   { 
     id: "consulting", 
@@ -20,7 +20,7 @@ const servicesList = [
     longDesc: "Our advisory experts analyze your current operational workflows, identify production bottlenecks, design automated pipeline sequences, and structure clear technology roadmaps to optimize overhead costs.",
     meta: "Digital Transformation · Overhead Optimization",
     gradient: "linear-gradient(135deg, #059669, #064e3b)",
-    imageUrl: "/images/Business Consulting.jpeg" // 🔗 Linked to public/images/consulting.jpg
+    imageUrl: "/images/Business-Consulting.jpeg" // 🔗 Linked to public/images/consulting.jpg
   },
   { 
     id: "quickbooks", 
@@ -29,7 +29,7 @@ const servicesList = [
     longDesc: "Get complete configuration and deployment of point-of-sale systems alongside full cloud QuickBooks ledger integrations, giving management real-time inventory tracking and multi-branch visibility.",
     meta: "Ledger Migration · Auditing Dashboards",
     gradient: "linear-gradient(135deg, #f97316, #78350f)",
-    imageUrl: "/images/QuickBooks Integration.jpeg" // 🔗 Linked to public/images/quickbooks.jpg
+    imageUrl: "/images/QuickBooks-Integration.jpeg" // 🔗 Linked to public/images/quickbooks.jpg
   },
   { 
     id: "pos-systems", 
@@ -38,7 +38,7 @@ const servicesList = [
     longDesc: "Seamless deployment of custom retail transactional terminals paired with automated inventory count scripts, credit merchant pathways, and localized secure hardware arrays.",
     meta: "Multi-branch Logging · Retail Hardware",
     gradient: "linear-gradient(135deg, #7c3aed, #4c1d95)",
-    imageUrl: "/images/POS Systems.jpeg" // 🔗 Linked to public/images/pos-systems.jpg
+    imageUrl: "/images/POS-Systems.jpeg" // 🔗 Linked to public/images/pos-systems.jpg
   },
   { 
     id: "taxation", 
@@ -47,7 +47,7 @@ const servicesList = [
     longDesc: "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
     meta: "Revenue Sync · Compliance Auditing",
     gradient: "linear-gradient(135deg, #dc2626, #4c0519)",
-    imageUrl: "/images/Taxation Systems.jpg" // 🔗 Linked to public/images/taxation.jpg
+    imageUrl: "/images/Taxation-Systems.jpg" // 🔗 Linked to public/images/taxation.jpg
   },
   { 
     id: "accounting-technology", 
@@ -56,7 +56,7 @@ const servicesList = [
     longDesc: "Deploy scalable cloud based data analytics dashboards that bridge corporate accounting workflows with live executive financial planning matrices.",
     meta: "Analytics Dashboards · Forecasting Matrices",
     gradient: "linear-gradient(135deg, #0ea5e9, #164e63)",
-    imageUrl: "/images/Accounting Technology.jpeg" // 🔗 Linked to public/images/accounting-technology.jpg
+    imageUrl: "/images/Accounting-Technology.jpeg" // 🔗 Linked to public/images/accounting-technology.jpg
   }
 ]
 
