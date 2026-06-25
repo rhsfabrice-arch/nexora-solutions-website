@@ -10,8 +10,8 @@ const servicesList = [
     desc: "Managed IT support and cloud infrastructure blueprints.",
     longDesc: "We provide corporate network configuration, server maintenance, active cloud migration security, and proactive 24/7 technical helpdesk support tailored to keep your business workflows scaling smoothly across East Africa.",
     meta: "Infrastructure · Cloud Support · Systems Engineering",
-    gradient: "linear-gradient(135deg, #2563eb, #1e3a8a)",
-    imageUrl: "/images/IT-services.jpeg" // 🔗 Linked to public/images/it-services.jpg
+    gradient: "linear-gradient(135deg, #1e3a8a, #0f172a)",
+    imageUrl: "/images/IT-services.jpeg" 
   },
   { 
     id: "consulting", 
@@ -19,8 +19,8 @@ const servicesList = [
     desc: "Strategic advisory and workflow transformation roadmaps.",
     longDesc: "Our advisory experts analyze your current operational workflows, identify production bottlenecks, design automated pipeline sequences, and structure clear technology roadmaps to optimize overhead costs.",
     meta: "Digital Transformation · Overhead Optimization",
-    gradient: "linear-gradient(135deg, #059669, #064e3b)",
-    imageUrl: "/images/Business-Consulting.jpeg" // 🔗 Linked to public/images/consulting.jpg
+    gradient: "linear-gradient(135deg, #064e3b, #022c22)",
+    imageUrl: "/images/Business-Consulting.jpeg" 
   },
   { 
     id: "quickbooks", 
@@ -28,8 +28,8 @@ const servicesList = [
     desc: "Certified setup, file migrations, and custom dashboards.",
     longDesc: "Get complete configuration and deployment of point-of-sale systems alongside full cloud QuickBooks ledger integrations, giving management real-time inventory tracking and multi-branch visibility.",
     meta: "Ledger Migration · Auditing Dashboards",
-    gradient: "linear-gradient(135deg, #f97316, #78350f)",
-    imageUrl: "/images/QuickBooks-Integration.jpeg" // 🔗 Linked to public/images/quickbooks.jpg
+    gradient: "linear-gradient(135deg, #78350f, #451a03)",
+    imageUrl: "/images/QuickBooks-Integration.jpeg" 
   },
   { 
     id: "pos-systems", 
@@ -37,8 +37,8 @@ const servicesList = [
     desc: "Cloud retail transactional terminals and inventory tracking.",
     longDesc: "Seamless deployment of custom retail transactional terminals paired with automated inventory count scripts, credit merchant pathways, and localized secure hardware arrays.",
     meta: "Multi-branch Logging · Retail Hardware",
-    gradient: "linear-gradient(135deg, #7c3aed, #4c1d95)",
-    imageUrl: "/images/POS-Systems.jpeg" // 🔗 Linked to public/images/pos-systems.jpg
+    gradient: "linear-gradient(135deg, #4c1d95, #2e1065)",
+    imageUrl: "/images/POS-Systems.jpeg" 
   },
   { 
     id: "taxation", 
@@ -46,8 +46,8 @@ const servicesList = [
     desc: "Automated regional compliance and automated filing structures.",
     longDesc: "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
     meta: "Revenue Sync · Compliance Auditing",
-    gradient: "linear-gradient(135deg, #dc2626, #4c0519)",
-    imageUrl: "/images/Taxation-Systems.jpg" // 🔗 Linked to public/images/taxation.jpg
+    gradient: "linear-gradient(135deg, #4c0519, #881337)",
+    imageUrl: "/images/Taxation-Systems.jpg" 
   },
   { 
     id: "accounting-technology", 
@@ -55,8 +55,8 @@ const servicesList = [
     desc: "Modern reporting frameworks and cloud ledger integrations.",
     longDesc: "Deploy scalable cloud based data analytics dashboards that bridge corporate accounting workflows with live executive financial planning matrices.",
     meta: "Analytics Dashboards · Forecasting Matrices",
-    gradient: "linear-gradient(135deg, #0ea5e9, #164e63)",
-    imageUrl: "/images/Accounting-Technology.jpeg" // 🔗 Linked to public/images/accounting-technology.jpg
+    gradient: "linear-gradient(135deg, #164e63, #083344)",
+    imageUrl: "/images/Accounting-Technology.jpeg" 
   }
 ]
 
@@ -66,18 +66,6 @@ export function Services() {
 
   return (
     <section id="services" style={{ padding: "80px 20px", background: "#ffffff", fontFamily: "sans-serif" }}>
-      {/* Smooth 8-second slow glowing sheen animation */}
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes shine {
-          0% { background-position: -200% 0; }
-          100% { background-position: 200% 0; }
-        }
-        .glowing-image-area {
-          background-size: 200% 100% !important;
-          animation: shine 8s linear infinite !important;
-        }
-      `}} />
-
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <div>
           <span style={{ color: "#10b981", fontSize: "14px", fontWeight: "bold" }}>What we do</span>
@@ -101,7 +89,7 @@ export function Services() {
         </div>
       </div>
 
-      {/* Interactive Light-Glow Popup Window */}
+      {/* Interactive Popup Window */}
       {currentService && (
         <div 
           onClick={() => setActiveIdx(null)}
@@ -112,9 +100,8 @@ export function Services() {
             style={{ width: "100%", maxWidth: "750px", background: "#ffffff", borderRadius: "24px", overflow: "hidden", border: "1px solid #e5e7eb", display: "flex", flexDirection: "row", flexWrap: "wrap" }}
           >
             
-            {/* Left Graphic/Image Column with light sweep */}
+            {/* Left Image Column View */}
             <div 
-              className="glowing-image-area"
               style={{
                 flex: "1 1 250px",
                 minHeight: "250px",
@@ -124,36 +111,53 @@ export function Services() {
                 justifyContent: "space-between",
                 color: "#ffffff",
                 position: "relative",
-                backgroundImage: `linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent), ${currentService.gradient}`,
-                backgroundBlendMode: "overlay"
+                background: currentService.gradient,
+                overflow: "hidden"
               }}
             >
-              {/* Image layer wrapped with safety rendering paths */}
+              {/* CRISP REAL IMAGE RENDER LAYER */}
               {currentService.imageUrl && (
-                <img 
-                  src={currentService.imageUrl} 
-                  alt={currentService.title}
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    opacity: 0.22,
-                    mixBlendMode: "luminosity",
-                    pointerEvents: "none"
-                  }}
-                />
+                <>
+                  <img 
+                    src={currentService.imageUrl} 
+                    alt={currentService.title}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      opacity: 0.85, 
+                      mixBlendMode: "normal", 
+                      pointerEvents: "none",
+                      zIndex: 1
+                    }}
+                  />
+                  {/* Protective text vignette shadow gradient overlay */}
+                  <div 
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(to top, rgba(15,23,42,0.85) 40%, rgba(15,23,42,0.2) 100%)",
+                      zIndex: 2,
+                      pointerEvents: "none"
+                    }}
+                  />
+                </>
               )}
 
-              <div style={{ fontSize: "24px", position: "relative", zIndex: 10 }}>💎</div>
+              <div style={{ fontSize: "24px", position: "relative", zIndex: 10, textShadow: "0 2px 4px rgba(0,0,0,0.5)" }}>💎</div>
               <div style={{ position: "relative", zIndex: 10 }}>
-                <span style={{ fontSize: "10px", fontWeight: "bold", tracking: "wider", opacity: 0.8, textTransform: "uppercase", display: "block" }}>{currentService.meta}</span>
-                <h4 style={{ fontSize: "24px", fontWeight: "900", margin: "6px 0 0 0", lineHeight: "1.2" }}>{currentService.title}</h4>
+                <span style={{ fontSize: "10px", fontWeight: "bold", tracking: "wider", opacity: 0.9, textTransform: "uppercase", display: "block", textShadow: "0 1px 3px rgba(0,0,0,0.6)" }}>
+                  {currentService.meta}
+                </span>
+                <h4 style={{ fontSize: "24px", fontWeight: "900", margin: "6px 0 0 0", lineHeight: "1.2", textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}>
+                  {currentService.title}
+                </h4>
               </div>
             </div>
 
-            {/* Right Side Content Deep-Dive Details */}
+            {/* Right Side Content Details */}
             <div style={{ flex: "1 1 350px", padding: "32px", position: "relative", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#ffffff" }}>
               <button 
                 onClick={() => setActiveIdx(null)}
@@ -182,3 +186,11 @@ export function Services() {
                 </Link>
                 <button 
                   onClick={() => setActiveIdx(null)}
+                  style={{ padding: "10px 20px", background: "#0b1f35", color: "#ffffff", border: "none", borderRadius: "10px", fontSize: "12px", fontWeight: "bold", cursor: "pointer" }}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
