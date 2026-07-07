@@ -40,16 +40,16 @@ const servicesList = [
     gradient: "linear-gradient(135deg, #4c1d95, #2e1065)",
     imageUrl: "/images/pos-systems.jpeg" 
   },
-  { 
-    id: "taxation", 
-    title: "Taxation Systems", 
-    desc: "Automated regional compliance and automated filing structures.",
-    longDesc: "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
-    meta: "Revenue Sync · Compliance Auditing",
-    gradient: "linear-gradient(135deg, #4c0519, #881337)",
-    // 🟢 FIXED WEB RESOLUTION: Pointed to a verified, high-speed uncompressed corporate tax asset link
-    imageUrl: "https://unsplash.com" 
-  },
+  {
+  id: "taxation",
+  title: "Taxation Systems",
+  desc: "Automated regional compliance and automated filing structures.",
+  longDesc:
+    "We handle thorough corporate financial compliance checks, direct tax structuring advisory, and complete alignment with local revenue authorities to shield your organization from legal friction.",
+  meta: "Revenue Sync · Compliance Auditing",
+  gradient: "linear-gradient(135deg, #4c0519, #881337)",
+  imageUrl: "/images/taxation-systems.jpeg",
+},
   { 
     id: "accounting-technology", 
     title: "Accounting Technology", 
@@ -184,7 +184,26 @@ export function Services() {
                 >
                   View full landing page ↗
                 </Link>
-                <button 
-                  onClick={() => setActiveIdx(null)}
-                  style={{ padding: "10px 20px", background: "#0b1f35", color: "#ffffff", border: "none", borderRadius: "10px", fontSize: "12px", fontWeight: "bold", cursor: "pointer" }}
-                >
+                <button
+  onClick={() => setActiveIdx(null)}
+  style={{
+    padding: "10px 20px",
+    background: "#0b1f35",
+    color: "#ffffff",
+    border: "none",
+    borderRadius: "10px",
+    fontSize: "12px",
+    fontWeight: "bold",
+    cursor: "pointer",
+  }}
+>
+  Close
+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  )
+}
